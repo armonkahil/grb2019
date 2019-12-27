@@ -1,5 +1,5 @@
 {
-  "name": "mern",
+  "name": "Google React Book Search",
   "version": "1.0.0",
   "description": "Mern Demo",
   "main": "server.js",
@@ -15,14 +15,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test",
-      "pre-push": "npm test",
-      "...": "..."
-    }
-  },
-  "author": "",
+  "author": "Armon Roberts",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.0.2",
