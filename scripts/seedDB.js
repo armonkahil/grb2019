@@ -3,11 +3,14 @@ const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
-);
-
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
+// Mongoose Deprecation warnings disabled
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
+mongoose.set("useUnifiedTopology", true);
+mongoose.connect(MONGODB_URI);
 const bookSeed = [
   {
     title: "The Dead Zone",

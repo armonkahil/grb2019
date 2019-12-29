@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import Row from "../components/Row";
-import SearchThis from "../components/SearchContainer";
 import Column from "../components/Column";
 import Book from "../components/BookContainer";
-import { List, ListItem } from "../components/List";
+import { List } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
-class Save extends Component {
+class Saved extends Component {
+  // eslint-disable-next-line
   state = {
     books: []
   };
   render() {
     return (
       <>
-        <Jumbotron />
-        <Row>
-          <Column>
-            <SearchThis />
-          </Column>
-        </Row>
+        <Jumbotron
+          title="(React) Google Books Saved"
+          lead="Saved Books"
+        />
         <Row>
           <Column>
             {this.state.books.length ? (

@@ -1,6 +1,9 @@
 {
   "name": "google-react",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "description": "Mern Demo",
   "main": "server.js",
   "scripts": {
@@ -15,17 +18,27 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ ttps://github.com/armonkahil/GoogleReactBooks.git"
+  },
   "author": "Armon Roberts",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armonkahil/GoogleReactBooks/issues"
+  },
+  "homepage": "https://github.com/armonkahil/GoogleReactBooks#readme",
   "devDependencies": {
     "concurrently": "^5.0.2",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "express": "^4.17.1",
     "gradient-string": "^1.2.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.8.3",
+    "path": "^0.12.7",
     "prettier": "^1.19.1"
   }
 }

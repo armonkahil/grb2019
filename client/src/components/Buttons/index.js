@@ -3,13 +3,13 @@ import React from "react";
 export function SearchBtn() {
   return (
     <>
-      <row>
+      <div className="row">
         <div className="d-flex justify-content-end">
           <button type="button" className="btn btn-primary">
             Search
           </button>
         </div>
-      </row>
+      </div>
     </>
   );
 }

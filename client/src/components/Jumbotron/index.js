@@ -1,12 +1,12 @@
 import React from "react";
 
-function Jumbotron() {
+function Jumbotron(props) {
   return (
     <div className="jumbotron jumbotron-fluid">
       <div className="container text-center">
-        <h1 className="display-3">(React) Google Books Search</h1>
+        <h1 className="display-3">{props.title}</h1>
         <h1 className="display-5">
-          Search for and Save Books of Interest
+          {props.lead}
         </h1>
       </div>
     </div>
