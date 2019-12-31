@@ -6,6 +6,7 @@ import Column from "../components/Column";
 import Book from '../components/BookContainer'
 import { List } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
+import API from "../utils/API"
 
 class Search extends Component {
   // eslint-disable-next-line
@@ -18,6 +19,17 @@ class Search extends Component {
     this.setState({ search: event.target.value });
     console.log(this.state.search)
   };
+
+  handleSubmit = event => {
+    console.log('submit button hit')
+    event.preventDefault()
+    API.getGoogleSearchBooks(this.state.search)
+      .then(res => this.setState({ books: res.data }))
+      .catch(err => console.log(err))
+    console.log(this.state.books)
+
+  }
+
   render() {
     return (
       <>
@@ -27,7 +39,7 @@ class Search extends Component {
         />
         <Row>
           <Column>
-            <SearchThis handleInputChange={this.handleInputChange} />
+            <SearchThis handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
           </Column>
         </Row>
         <Row>

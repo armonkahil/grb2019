@@ -1,11 +1,15 @@
 import React from "react";
 
-export function SearchBtn() {
+export function SearchBtn(props) {
   return (
     <>
-      <div className="row">
+      <div className="row container d-flex align-self-end">
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={props.handleSubmit}
+          >
             Search
           </button>
         </div>
