@@ -43,6 +43,7 @@
     "gradient-string": "^1.2.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.8.3",
+    "path": "^0.12.7",
     "prettier": "^1.19.1"
   }
 }

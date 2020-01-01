@@ -5,13 +5,14 @@ import SearchThis from "../components/SearchContainer";
 import Column from "../components/Column";
 import Book from '../components/BookContainer'
 import { List } from "../components/List";
-import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API"
+import tester from './tester'
 
 class Search extends Component {
   // eslint-disable-next-line
   state = {
-    books: [],
+    // books: [],
+    books: tester,
     search: ""
   };
   // handle any changes to the input fields
@@ -24,10 +25,15 @@ class Search extends Component {
     console.log('submit button hit')
     event.preventDefault()
     API.getGoogleSearchBooks(this.state.search)
-      .then(res => this.setState({ books: res.data }))
+      .then(res => this.setState({ books: res.data.items })
+      )
       .catch(err => console.log(err))
-    console.log(this.state.books)
-
+  }
+  
+  handleSave = event => {
+    console.log('save button hit')
+    API.saveBook(event)
+    .then(res=> console.log(res))
   }
 
   render() {
@@ -47,14 +53,19 @@ class Search extends Component {
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
-                  <Book key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
-                  </Book>
+                  <Book
+                    key={book.id}
+                    selfLink={book.selfLink}
+                    id={book.id}
+                    title={book.volumeInfo.title}
+                    subtitle={book.volumeInfo.subtitle}
+                    authors={book.volumeInfo.authors.join(', ')}
+                    description={book.volumeInfo.description}
+                    thumbnail={book.volumeInfo.imageLinks.thumbnail}
+                    smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
+                    book={book}
+                    handleSave={this.handleSave}
+                  />                
                 ))}
               </List>
             ) : (

@@ -7,7 +7,7 @@ export function SearchBtn(props) {
         <div className="d-flex justify-content-end">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mx-2"
             onClick={props.handleSubmit}
           >
             Search
@@ -18,11 +18,11 @@ export function SearchBtn(props) {
   );
 }
 
-export function SaveBtn() {
+export function SaveBtn(props) {
   return (
     <>
-      <button type="button" className="btn btn-primary">
-        View
+      <button type="button" className="btn btn-primary mx-2" id={props.id} onClick={props.handleSave} >
+        Save
       </button>
     </>
   );
@@ -31,10 +31,18 @@ export function SaveBtn() {
 export function ViewBtn() {
   return (
     <>
-      <button type="button" className="btn btn-primary">
+      <button type="button" className="btn btn-sm-success">
         View
       </button>
     </>
+  );
+}
+
+export function DeleteBtn(props) {
+  return (
+    <span className="delete-btn" {...props} role="button" tabIndex="0">
+      ✗
+    </span>
   );
 }
 

@@ -4,7 +4,7 @@ import Row from "../components/Row";
 import Column from "../components/Column";
 import Book from "../components/BookContainer";
 import { List } from "../components/List";
-import DeleteBtn from "../components/DeleteBtn";
+
 class Saved extends Component {
   // eslint-disable-next-line
   state = {
@@ -28,7 +28,7 @@ class Saved extends Component {
                         {book.title} by {book.author}
                       </strong>
                     </a>
-                    <DeleteBtn />
+                    
                   </Book>
                 ))}
               </List>
