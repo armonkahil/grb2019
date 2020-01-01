@@ -2,32 +2,32 @@ import React from "react";
 import { SaveBtn, ViewBtn } from "../Buttons";
 import "./style.css";
 
-function Book(props) {
+function Book({ title, description, thumbnail, subtitle, authors, book, handleSave }) {
   return (
     <>
-      {props.description === undefined ? (
+      {description === undefined ? (
         <>
           <div className="card card-body border-light m-3">
             <div className="row align-self-center">
               <div className="col-4 align-self-center">
-                <img src={props.thumbnail} className="img-fluid" alt=""></img>
+                <img src={thumbnail} className="img-fluid" alt=""></img>
               </div>
               <div className="card-title text-left">
-                <h3 className="display-6">{props.title}</h3>
-                {props.subtitle === undefined ? (
+                <h3 className="display-6">{title}</h3>
+                {subtitle === undefined ? (
                   <>
-                    <h4>{props.authors}</h4>
+                    <h4>Written By {authors}</h4>
                   </>
                 ) : (
                   <>
-                    <h4>{props.subtitle}</h4>
+                    <h4>{subtitle}</h4>
 
-                    <h4>{props.authors}</h4>
+                    <h4>Written By {authors}</h4>
                   </>
                 )}
               </div>
               <div className="">
-                <SaveBtn book={props.book} onClick={props.handleSave}/>
+                <SaveBtn book={book} onClick={handleSave} />
                 <ViewBtn />
               </div>
             </div>
@@ -38,21 +38,21 @@ function Book(props) {
           <div className="card card-body m-3">
             <div className="row container-fluid justify-content-between">
               <div className="card-title text-left">
-                <h6 className="display-6">{props.title}</h6>
-                {props.subtitle === undefined ? (
+                <h6 className="display-6">{title}</h6>
+                {subtitle === undefined ? (
                   <>
-                    <small>{props.authors}</small>
+                    <small>Written By {authors}</small>
                   </>
                 ) : (
                   <>
-                    <small>{props.subtitle}</small>
+                    <small>{subtitle}</small>
                     <br></br>
-                    <small>{props.authors}</small>
+                    <small>written By {authors}</small>
                   </>
                 )}
               </div>
               <div className="">
-                <SaveBtn />
+                <SaveBtn book={book} onClick={handleSave} />
                 <ViewBtn />
               </div>
             </div>
@@ -60,7 +60,7 @@ function Book(props) {
               <div className="row">
                 <div className="col-2 align-self-center">
                   <img
-                    src={props.thumbnail}
+                    src={thumbnail}
                     className="img-thumbnail img-fluid"
                     alt=""
                   ></img>
@@ -68,7 +68,7 @@ function Book(props) {
                 <div className="col">
                   <div className="card-body ">
                     <p className="card-text overflow-auto text-left ">
-                      {props.description}
+                      {description}
                     </p>
                   </div>
                 </div>
