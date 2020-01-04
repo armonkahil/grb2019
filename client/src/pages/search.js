@@ -11,8 +11,8 @@ import tester from './tester'
 class Search extends Component {
   // eslint-disable-next-line
   state = {
-    // books: [],
-    books: tester,
+    books: [],
+    // books: tester,
     search: ""
   };
   // handle any changes to the input fields
@@ -44,12 +44,15 @@ class Search extends Component {
     return (
       <>
         <Jumbotron
-          title="(React) Google Books Search"
-          lead="Search for and Save Books of Interest"
+          title='(React) Google Books Search'
+          lead='Search for and Save Books of Interest'
         />
         <Row>
           <Column>
-            <SearchThis handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+            <SearchThis
+              handleInputChange={this.handleInputChange}
+              handleSubmit={this.handleSubmit}
+            />
           </Column>
         </Row>
         <Row>
@@ -69,17 +72,17 @@ class Search extends Component {
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
                     book={book}
                     value={book}
-                    handleSave={() => this.handleSave(
-                      {
-                      title: book.volumeInfo.title,
-                      author: book.volumeInfo.authors,
-                      description: book.volumeInfo.description,
-                      image: book.volumeInfo.imageLinks.smallThumbnail,
-                      link: book.volumeInfo.infoLink,
-                      _id: book.id
+                    handleSave={() =>
+                      this.handleSave({
+                        _id: book.id,
+                        title: book.volumeInfo.title,
+                        author: book.volumeInfo.authors.join(', '),
+                        description: book.volumeInfo.description,
+                        image: book.volumeInfo.imageLinks.thumbnail,
+                        link: book.volumeInfo.infoLink
+                      })
                     }
-                    )}
-                  />                
+                  />
                 ))}
               </List>
             ) : (
@@ -88,7 +91,7 @@ class Search extends Component {
           </Column>
         </Row>
       </>
-    );
+    )
   }
 }
 

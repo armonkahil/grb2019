@@ -13,12 +13,14 @@ class Saved extends Component {
   };
   componentDidMount() {
     this.loadBooks();
+    
   }
 
   loadBooks = () => {
     API.getBooks()
       .then(res => this.setState({ books: res.data }))
       .catch(err => console.log(err));
+    console.log(this.state.books)
   };
   render() {
     return (
@@ -29,13 +31,12 @@ class Saved extends Component {
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
-                  <Book key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
-                  </Book>
+                  <Book key={book._id}
+                    authors={book.authors}
+                    title={book.title}
+                    description={book.description}
+                    thumbnail={book.image}
+                  />
                 ))}
               </List>
             ) : (
