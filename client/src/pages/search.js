@@ -28,12 +28,16 @@ class Search extends Component {
       .then(res => this.setState({ books: res.data.items })
       )
       .catch(err => console.log(err))
+    console.log(this.state.books)
   }
   
-  handleSave = event => {
+  handleSave = bookSaved => {
+    console.log(bookSaved)
     console.log('save button hit')
-    API.saveBook(event)
-    .then(res=> console.log(res))
+    API.saveBook(bookSaved)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+   
   }
 
   render() {
@@ -55,8 +59,8 @@ class Search extends Component {
                 {this.state.books.map(book => (
                   <Book
                     key={book.id}
-                    selfLink={book.selfLink}
                     id={book.id}
+                    link={book.volumeInfo.previewLink}
                     title={book.volumeInfo.title}
                     subtitle={book.volumeInfo.subtitle}
                     authors={book.volumeInfo.authors.join(', ')}
@@ -64,7 +68,17 @@ class Search extends Component {
                     thumbnail={book.volumeInfo.imageLinks.thumbnail}
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
                     book={book}
-                    handleSave={this.handleSave}
+                    value={book}
+                    handleSave={() => this.handleSave(
+                      {
+                      title: book.volumeInfo.title,
+                      author: book.volumeInfo.authors,
+                      description: book.volumeInfo.description,
+                      image: book.volumeInfo.imageLinks.smallThumbnail,
+                      link: book.volumeInfo.infoLink,
+                      _id: book.id
+                    }
+                    )}
                   />                
                 ))}
               </List>

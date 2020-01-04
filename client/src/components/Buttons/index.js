@@ -21,19 +21,26 @@ export function SearchBtn(props) {
 export function SaveBtn(props) {
   return (
     <>
-      <button type="button" className="btn btn-primary mx-2" id={props.id} onClick={props.handleSave} >
+      <button type="button" className="btn btn-primary mx-2" {...props} >
         Save
       </button>
     </>
   );
 }
 
-export function ViewBtn() {
+export function ViewBtn({ link, onClick, children }) {
   return (
     <>
-      <button type="button" className="btn btn-sm-success">
+      <a
+        className="btn btn-success"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onClick}
+        href={link}
+      >
         View
-      </button>
+        {children}
+      </a>
     </>
   );
 }

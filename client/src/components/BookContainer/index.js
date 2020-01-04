@@ -2,12 +2,22 @@ import React from "react";
 import { SaveBtn, ViewBtn } from "../Buttons";
 import "./style.css";
 
-function Book({ title, description, thumbnail, subtitle, authors, book, handleSave }) {
+function Book({
+  id,
+  title,
+  description,
+  thumbnail,
+  subtitle,
+  authors,
+  book,
+  handleSave,
+  link
+}) {
   return (
     <>
       {description === undefined ? (
         <>
-          <div className="card card-body border-light m-3">
+          <div className="card card-body border-light m-3 animated fadeIn">
             <div className="row align-self-center">
               <div className="col-4 align-self-center">
                 <img src={thumbnail} className="img-fluid" alt=""></img>
@@ -27,15 +37,19 @@ function Book({ title, description, thumbnail, subtitle, authors, book, handleSa
                 )}
               </div>
               <div className="">
-                <SaveBtn book={book} onClick={handleSave} />
-                <ViewBtn />
+                <SaveBtn
+                  id={id}
+                  value={book}
+                  onClick={handleSave}
+                />
+                <ViewBtn link={link} />
               </div>
             </div>
           </div>
         </>
       ) : (
         <>
-          <div className="card card-body m-3">
+          <div className="card card-body m-3 animated fadeIn">
             <div className="row container-fluid justify-content-between">
               <div className="card-title text-left">
                 <h6 className="display-6">{title}</h6>
@@ -52,7 +66,11 @@ function Book({ title, description, thumbnail, subtitle, authors, book, handleSa
                 )}
               </div>
               <div className="">
-                <SaveBtn book={book} onClick={handleSave} />
+                <SaveBtn
+                  id={id}
+                  name={book}
+                  onClick={handleSave}
+                />
                 <ViewBtn />
               </div>
             </div>

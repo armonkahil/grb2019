@@ -4,19 +4,26 @@ import Row from "../components/Row";
 import Column from "../components/Column";
 import Book from "../components/BookContainer";
 import { List } from "../components/List";
+import API from '../utils/API'
 
 class Saved extends Component {
   // eslint-disable-next-line
   state = {
     books: []
   };
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      .then(res => this.setState({ books: res.data }))
+      .catch(err => console.log(err));
+  };
   render() {
     return (
       <>
-        <Jumbotron
-          title="(React) Google Books Saved"
-          lead="Saved Books"
-        />
+        <Jumbotron title="(React) Google Books Saved" lead="Saved Books" />
         <Row>
           <Column>
             {this.state.books.length ? (
@@ -28,7 +35,6 @@ class Saved extends Component {
                         {book.title} by {book.author}
                       </strong>
                     </a>
-                    
                   </Book>
                 ))}
               </List>

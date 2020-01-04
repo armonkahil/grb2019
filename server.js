@@ -11,8 +11,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
-// Mongoose Deprecation warnings disabled
+  process.env.MONGODB_URI || "mongodb://localhost/googleBooks"
+
+  // Mongoose Deprecation warnings disabled
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
@@ -20,12 +21,13 @@ mongoose.set("useUnifiedTopology", true);
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("MongoDB Connected!"))
-  .catch(error => console.log("MongoDB did not connect: ", error));
+  .catch(error => console.log("MongoDB did not connect: ", error))
+console.log(MONGODB_URI)
 app.use(routes);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"))
 });
 app.listen(PORT, function() {
-  console.log(gradient.summer(`🌎 ==> API server now on port ${PORT}!`));
+  console.log(gradient.summer(`🌎 ==> API server now on port ${PORT}!`))
 });

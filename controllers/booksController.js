@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/index");
 
 // Defining methods for the booksController
 module.exports = {
@@ -16,12 +16,15 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    console.log('create route hit')
+    console.log(req.body)
+    console.log(req.params)
     db.Book
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
+  update: function (req, res) {
     db.Book
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
