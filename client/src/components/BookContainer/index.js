@@ -38,7 +38,7 @@ function Book({
               </div>
               <div className="">
                 <SaveBtn
-                  id={id}
+                  key={book.key}
                   value={book}
                   onClick={handleSave}
                 />

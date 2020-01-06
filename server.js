@@ -1,29 +1,31 @@
 const express = require('express')
+const path = require('path')
 const mongoose = require('mongoose')
-const gradient = require('gradient-string')
 
 const routes = require('./routes')
 const PORT = process.env.PORT || 3001
 const app = express()
 
-app.use(routes)
+// Define middleware here
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
+// Add routes, both API and view
+app.use(routes)
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/googleReactBooks'
-
-// Mongoose Deprecation warnings disabled
-mongoose.set('useNewUrlParser', true)
-mongoose.set('useFindAndModify', false)
-mongoose.set('useCreateIndex', true)
-mongoose.set('useUnifiedTopology', true)
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => console.log(gradient.summer('MongoDB Connected!')))
-  .catch(error => console.log('MongoDB did not connect: ', error))
-
+// Connect to the Mongo DB
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/googlebooks', {
+  useCreateIndex: true,
+  useNewUrlParser: true
+})
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+// Start the API server
 app.listen(PORT, function() {
-  console.log(gradient.summer(`🌎 ==> API server now on port ${PORT}!`))
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
 })

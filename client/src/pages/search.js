@@ -6,38 +6,50 @@ import Column from "../components/Column";
 import Book from '../components/BookContainer'
 import { List } from "../components/List";
 import API from "../utils/API"
-import tester from './tester'
+
 
 class Search extends Component {
   // eslint-disable-next-line
   state = {
-    books: [],
-    // books: tester,
-    search: ""
-  };
+    books: []
+  }
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data })
+      )
+      .catch(err => console.log(err))
+  }
+
   // handle any changes to the input fields
   handleInputChange = event => {
-    this.setState({ search: event.target.value });
+    this.setState({ search: event.target.value })
     console.log(this.state.search)
-  };
+  }
 
   handleSubmit = event => {
     console.log('submit button hit')
     event.preventDefault()
     API.getGoogleSearchBooks(this.state.search)
-      .then(res => this.setState({ books: res.data.items })
-      )
+      .then(res => this.setState({ books: res.data.items }))
       .catch(err => console.log(err))
     console.log(this.state.books)
   }
-  
+
   handleSave = bookSaved => {
-    console.log(bookSaved)
+    console.log('book Saved', bookSaved)
+    // this.setState({
+    //   _id: bookSaved.id,
+    //   title: bookSaved.title,
+    //   authors: bookSaved.authors,
+    //   description: bookSaved.description,
+    //   image: bookSaved.thumbnail,
+    //   link: bookSaved.link
+    // })
     console.log('save button hit')
     API.saveBook(bookSaved)
       .then(res => console.log(res))
-      .catch(err => console.log(err));
-   
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -62,11 +74,10 @@ class Search extends Component {
                 {this.state.books.map(book => (
                   <Book
                     key={book.id}
-                    id={book.id}
                     link={book.volumeInfo.previewLink}
                     title={book.volumeInfo.title}
                     subtitle={book.volumeInfo.subtitle}
-                    authors={book.volumeInfo.authors.join(', ')}
+                    authors={book.volumeInfo.authors}
                     description={book.volumeInfo.description}
                     thumbnail={book.volumeInfo.imageLinks.thumbnail}
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
@@ -74,12 +85,13 @@ class Search extends Component {
                     value={book}
                     handleSave={() =>
                       this.handleSave({
-                        _id: book.id,
+                        _id: book.key,
                         title: book.volumeInfo.title,
                         author: book.volumeInfo.authors.join(', '),
                         description: book.volumeInfo.description,
                         image: book.volumeInfo.imageLinks.thumbnail,
-                        link: book.volumeInfo.infoLink
+                        link: book.volumeInfo.infoLink,
+                        saved: true
                       })
                     }
                   />
