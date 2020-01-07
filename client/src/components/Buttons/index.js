@@ -28,21 +28,19 @@ export function SaveBtn(props) {
   );
 }
 
-export function ViewBtn({ link, onClick, children }) {
+export function ViewBtn(props) {
   return (
     <>
       <a
-        className="btn btn-success"
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={onClick}
-        href={link}
+        className='btn btn-success active'
+        href={props.link}
+        target={'_blank'}
+        {...props}
       >
         View
-        {children}
       </a>
     </>
-  );
+  )
 }
 
 export function DeleteBtn(props) {

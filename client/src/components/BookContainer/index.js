@@ -1,6 +1,6 @@
-import React from "react";
-import { SaveBtn, ViewBtn } from "../Buttons";
-import "./style.css";
+import React from 'react'
+import { SaveBtn, ViewBtn } from '../Buttons'
+import './style.css'
 
 function Book({
   id,
@@ -9,21 +9,21 @@ function Book({
   thumbnail,
   subtitle,
   authors,
-  book,
   handleSave,
-  link
+  link,
+  onClick
 }) {
   return (
     <>
       {description === undefined ? (
         <>
-          <div className="card card-body border-light m-3 animated fadeIn">
-            <div className="row align-self-center">
-              <div className="col-4 align-self-center">
-                <img src={thumbnail} className="img-fluid" alt=""></img>
+          <div className='card card-body border-light m-3 animated fadeIn'>
+            <div className='row align-self-center'>
+              <div className='col-4 align-self-center'>
+                <img src={thumbnail} className='img-fluid' alt=''></img>
               </div>
-              <div className="card-title text-left">
-                <h3 className="display-6">{title}</h3>
+              <div className='card-title text-left'>
+                <h3 className='display-6'>{title}</h3>
                 {subtitle === undefined ? (
                   <>
                     <h4>Written By {authors}</h4>
@@ -36,23 +36,19 @@ function Book({
                   </>
                 )}
               </div>
-              <div className="">
-                <SaveBtn
-                  key={book.key}
-                  data-value={book}
-                  onClick={handleSave}
-                />
-                <ViewBtn link={link} />
+              <div className=''>
+                <SaveBtn key={id} onClick={handleSave} />
+                <ViewBtn link={link} onClick={onClick} />
               </div>
             </div>
           </div>
         </>
       ) : (
         <>
-          <div className="card card-body m-3 animated fadeIn">
-            <div className="row container-fluid justify-content-between">
-              <div className="card-title text-left">
-                <h6 className="display-6">{title}</h6>
+          <div className='card card-body m-3 animated fadeIn'>
+            <div className='row container-fluid justify-content-between'>
+              <div className='card-title text-left'>
+                <h6 className='display-6'>{title}</h6>
                 {subtitle === undefined ? (
                   <>
                     <small>Written By {authors}</small>
@@ -65,27 +61,23 @@ function Book({
                   </>
                 )}
               </div>
-              <div className="">
-                <SaveBtn
-                  id={id}
-                  name={book}
-                  onClick={handleSave}
-                />
-                <ViewBtn />
+              <div className=''>
+                <SaveBtn id={id} onClick={handleSave} />
+                <ViewBtn link={link} />
               </div>
             </div>
-            <div className="card border-light mb-3">
-              <div className="row">
-                <div className="col-2 align-self-center">
+            <div className='card border-light mb-3'>
+              <div className='row'>
+                <div className='col-2 align-self-center'>
                   <img
                     src={thumbnail}
-                    className="img-thumbnail img-fluid"
-                    alt=""
+                    className='img-thumbnail img-fluid'
+                    alt=''
                   ></img>
                 </div>
-                <div className="col">
-                  <div className="card-body ">
-                    <p className="card-text overflow-auto text-left ">
+                <div className='col'>
+                  <div className='card-body'>
+                    <p className='card-text overflow-auto text-left'>
                       {description}
                     </p>
                   </div>
@@ -96,7 +88,7 @@ function Book({
         </>
       )}
     </>
-  );
+  )
 }
 
-export default Book;
+export default Book

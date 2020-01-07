@@ -11,11 +11,6 @@ export default {
     let res = await axios.get('/api/books')
     return res.data || [];
   },
-  // Gets the book with the given id
-  getBook: async (id) => {
-    let res = await axios.get("/api/books/" + id)
-    return res.data || []
-  },
   // Deletes the book with the given id
   deleteBook: async (id) => {
     let res = await axios.delete("/api/books/" + id);

@@ -81,7 +81,7 @@ class Search extends Component {
                     link={book.volumeInfo.previewLink}
                     title={book.volumeInfo.title}
                     subtitle={book.volumeInfo.subtitle}
-                    author={book.volumeInfo.authors}
+                    authors={book.volumeInfo.authors.join(', ')}
                     description={book.volumeInfo.description}
                     thumbnail={book.volumeInfo.imageLinks.thumbnail}
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
@@ -91,7 +91,7 @@ class Search extends Component {
                       this.handleSave({
                         _id: book.id,
                         title: book.volumeInfo.title,
-                        author: this.authorJoin(book.volumeInfo.authors),
+                        authors: book.volumeInfo.authors.join(', '),
                         description: book.volumeInfo.description,
                         image: book.volumeInfo.imageLinks.thumbnail,
                         link: book.volumeInfo.infoLink,
