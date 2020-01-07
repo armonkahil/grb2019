@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Search from './pages/search'
 import Saved from './pages/save'
 import NoMatch from './pages/nomatch'
 import Navbar from './components/Navbar'
 
-class App extends Component {
-  render() {
+function App () {
     return (
       <div>
         <Router>
@@ -21,6 +20,6 @@ class App extends Component {
       </div>
     )
   }
-}
+
 
 export default App

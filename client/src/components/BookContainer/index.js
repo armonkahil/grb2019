@@ -39,7 +39,7 @@ function Book({
               <div className="">
                 <SaveBtn
                   key={book.key}
-                  value={book}
+                  data-value={book}
                   onClick={handleSave}
                 />
                 <ViewBtn link={link} />

@@ -23,7 +23,7 @@ export default {
   },
   // Saves a book to the database
   saveBook: async (bookData) => {
-    let res = await axios.post("/api/books", bookData);
+    let res = await axios.post("/api/books", bookData)
     return res.data || [];
   }
 };

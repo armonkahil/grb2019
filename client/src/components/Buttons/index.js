@@ -21,7 +21,7 @@ export function SearchBtn(props) {
 export function SaveBtn(props) {
   return (
     <>
-      <button type="button" className="btn btn-primary mx-2" {...props} >
+      <button type="button" className={`btn btn-primary mx-2 ${props["data-value"]}`} {...props} >
         Save
       </button>
     </>

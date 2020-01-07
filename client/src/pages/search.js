@@ -9,10 +9,10 @@ import API from "../utils/API"
 
 
 class Search extends Component {
-  // eslint-disable-next-line
   state = {
     books: []
   }
+  
   loadBooks = () => {
     API.getBooks()
       .then(res =>
@@ -37,19 +37,22 @@ class Search extends Component {
   }
 
   handleSave = bookSaved => {
-    console.log('book Saved', bookSaved)
-    // this.setState({
-    //   _id: bookSaved.id,
-    //   title: bookSaved.title,
-    //   authors: bookSaved.authors,
-    //   description: bookSaved.description,
-    //   image: bookSaved.thumbnail,
-    //   link: bookSaved.link
-    // })
     console.log('save button hit')
+    console.log('book Saved', bookSaved)
+  
     API.saveBook(bookSaved)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this.updateBooks(bookSaved)  
+      } 
+      )
       .catch(err => console.log(err))
+  }
+
+  updateBooks = bookSaved => {
+    console.log('bookSaved:', bookSaved)
+    const newBooks = this.state.books.filter(book => bookSaved._id !== book.id)
+    this.setState({books: newBooks})
   }
 
   render() {
@@ -74,10 +77,11 @@ class Search extends Component {
                 {this.state.books.map(book => (
                   <Book
                     key={book.id}
+                    id={book.id}
                     link={book.volumeInfo.previewLink}
                     title={book.volumeInfo.title}
                     subtitle={book.volumeInfo.subtitle}
-                    authors={book.volumeInfo.authors}
+                    author={book.volumeInfo.authors}
                     description={book.volumeInfo.description}
                     thumbnail={book.volumeInfo.imageLinks.thumbnail}
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
@@ -85,9 +89,9 @@ class Search extends Component {
                     value={book}
                     handleSave={() =>
                       this.handleSave({
-                        _id: book.key,
+                        _id: book.id,
                         title: book.volumeInfo.title,
-                        author: book.volumeInfo.authors.join(', '),
+                        author: this.authorJoin(book.volumeInfo.authors),
                         description: book.volumeInfo.description,
                         image: book.volumeInfo.imageLinks.thumbnail,
                         link: book.volumeInfo.infoLink,
@@ -98,7 +102,7 @@ class Search extends Component {
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
+              <h3 className="text-center">No Results to Display</h3>
             )}
           </Column>
         </Row>
