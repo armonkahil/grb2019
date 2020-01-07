@@ -13,14 +13,6 @@ class Search extends Component {
     books: []
   }
   
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data })
-      )
-      .catch(err => console.log(err))
-  }
-
   // handle any changes to the input fields
   handleInputChange = event => {
     this.setState({ search: event.target.value })
@@ -30,11 +22,15 @@ class Search extends Component {
   handleSubmit = event => {
     console.log('submit button hit')
     event.preventDefault()
-    API.getGoogleSearchBooks(this.state.search)
-      .then(res => this.setState({ books: res.data.items }))
-      .catch(err => console.log(err))
-    console.log(this.state.books)
+    if (this.state.search === undefined) {
+      console.log('button hit')
+    } else {
+      API.getGoogleSearchBooks(this.state.search)
+        .then(res => this.setState({ books: res.data.items }))
+        .catch(err => console.log(err))
+      console.log(this.state.books)
   }
+}
 
   handleSave = bookSaved => {
     console.log('save button hit')
@@ -62,7 +58,7 @@ class Search extends Component {
           title='(React) Google Books Search'
           lead='Search for and Save Books of Interest'
         />
-        <Row>
+        <Row spacing={'justify-content-center mx-auto my-3'}>
           <Column>
             <SearchThis
               handleInputChange={this.handleInputChange}
@@ -70,7 +66,7 @@ class Search extends Component {
             />
           </Column>
         </Row>
-        <Row>
+        <Row spacing={'justify-content-center mx-auto my-3'}>
           <Column>
             {this.state.books.length ? (
               <List>
@@ -85,6 +81,7 @@ class Search extends Component {
                     description={book.volumeInfo.description}
                     thumbnail={book.volumeInfo.imageLinks.thumbnail}
                     smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
+                    saved={false}
                     book={book}
                     value={book}
                     handleSave={() =>
@@ -102,7 +99,7 @@ class Search extends Component {
                 ))}
               </List>
             ) : (
-              <h3 className="text-center">No Results to Display</h3>
+              <h3 className='text-center'>No Results to Display</h3>
             )}
           </Column>
         </Row>

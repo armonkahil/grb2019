@@ -1,6 +1,9 @@
 import React from 'react'
-import { SaveBtn, ViewBtn } from '../Buttons'
 import './style.css'
+import Card from '../Card'
+import Row from '../Row'
+import ImageContainer from '../ImageContainer'
+import ButtonContainer from '../ButtonContainer'
 
 function Book({
   id,
@@ -11,17 +14,17 @@ function Book({
   authors,
   handleSave,
   link,
-  onClick
+  onClick,
+  saved,
+  handleDelete
 }) {
   return (
     <>
       {description === undefined ? (
         <>
-          <div className='card card-body border-light m-3 animated fadeIn'>
-            <div className='row align-self-center'>
-              <div className='col-4 align-self-center'>
-                <img src={thumbnail} className='img-fluid' alt=''></img>
-              </div>
+          <Card>
+            <Row spacing='row align-self-center'>
+              <ImageContainer />
               <div className='card-title text-left'>
                 <h3 className='display-6'>{title}</h3>
                 {subtitle === undefined ? (
@@ -36,17 +39,21 @@ function Book({
                   </>
                 )}
               </div>
-              <div className=''>
-                <SaveBtn key={id} onClick={handleSave} />
-                <ViewBtn link={link} onClick={onClick} />
-              </div>
-            </div>
-          </div>
+              <ButtonContainer
+                link={link}
+                onClick={onClick}
+                handleSave={handleSave}
+                saved={saved}
+                delete={handleDelete}
+                id={id}
+              />
+            </Row>
+          </Card>
         </>
       ) : (
         <>
-          <div className='card card-body m-3 animated fadeIn'>
-            <div className='row container-fluid justify-content-between'>
+          <Card>
+            <Row spacing='row container-fluid justify-content-between'>
               <div className='card-title text-left'>
                 <h6 className='display-6'>{title}</h6>
                 {subtitle === undefined ? (
@@ -61,20 +68,19 @@ function Book({
                   </>
                 )}
               </div>
-              <div className=''>
-                <SaveBtn id={id} onClick={handleSave} />
-                <ViewBtn link={link} />
-              </div>
-            </div>
+              <ButtonContainer
+                link={link}
+                onClick={onClick}
+                handleSave={handleSave}
+                saved={saved}
+                  delete={handleDelete}
+                  id={id}
+              />
+            </Row>
             <div className='card border-light mb-3'>
-              <div className='row'>
-                <div className='col-2 align-self-center'>
-                  <img
-                    src={thumbnail}
-                    className='img-thumbnail img-fluid'
-                    alt=''
-                  ></img>
-                </div>
+              <Row>
+                <ImageContainer thumbnail={thumbnail} />
+
                 <div className='col'>
                   <div className='card-body'>
                     <p className='card-text overflow-auto text-left'>
@@ -82,9 +88,9 @@ function Book({
                     </p>
                   </div>
                 </div>
-              </div>
+              </Row>
             </div>
-          </div>
+          </Card>
         </>
       )}
     </>

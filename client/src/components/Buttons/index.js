@@ -31,21 +31,21 @@ export function SaveBtn(props) {
 export function ViewBtn(props) {
   return (
     <>
-      <a
+      <button
         className='btn btn-success active'
         href={props.link}
         target={'_blank'}
         {...props}
       >
         View
-      </a>
+      </button>
     </>
   )
 }
 
 export function DeleteBtn(props) {
   return (
-    <span className="delete-btn" {...props} role="button" tabIndex="0">
+    <span className="btn btn-info mx-2 delete-btn float-right" {...props} role="button" tabIndex="0">
       ✗
     </span>
   );

@@ -4,21 +4,16 @@ import Jumbotron from "../components/Jumbotron";
 
 function NoMatch() {
   return (
-    <Container fluid>
-      <Row>
-        <Col size="md-12">
-          <Jumbotron>
-            <h1>404 Page Not Found</h1>
-            <h1>
-              <span role="img" aria-label="Face With Rolling Eyes Emoji">
-                🙄
-              </span>
-            </h1>
+    <Container>
+      <Row spacing=" row align-self-center">
+        <Col>
+          <Jumbotron title='404 Page Not Found' lead='🙄'>
+         
           </Jumbotron>
         </Col>
       </Row>
     </Container>
-  );
+  )
 }
 
 export default NoMatch;
