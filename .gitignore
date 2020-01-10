@@ -121,3 +121,9 @@ dist
 .DS_Store
 
 /client/build
+
+node_modules/
+.env
+*.orig
+.idea/
+.vscode/
