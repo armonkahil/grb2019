@@ -21,7 +21,9 @@ app.use(routes)
  mongoose.Promise = global.Promise
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/googleBooks', { useNewUrlParser: true})
- 
+mongoose.connection.on('error', err => {
+  logError(err)
+})
 // Start the API server
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
