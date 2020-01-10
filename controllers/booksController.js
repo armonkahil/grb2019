@@ -2,6 +2,7 @@ const db = require('../models')
 
 // Defining methods for the booksController
 module.exports = {
+  // find all books
   findAll: function(req, res) {
     db.Book.find(req.query)
       .sort({ date: -1 })
@@ -19,7 +20,7 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   update: function(req, res) {
-    db.Book.findOneAndUpdate({ _id: req.params._id }, req.body)
+    db.Book.findOneAndUpdate({ _id: req.body._id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
