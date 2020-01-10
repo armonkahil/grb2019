@@ -23,30 +23,36 @@ function Book({
       {description === undefined ? (
         <>
           <Card>
-            <Row spacing='row align-self-center'>
-              <ImageContainer thumbnail={thumbnail} />
-              <div className='card-title text-left'>
-                <h3 className='display-6'>{title}</h3>
-                {subtitle === undefined ? (
-                  <>
-                    <h4>Written By {authors}</h4>
-                  </>
-                ) : (
-                  <>
-                    <h4>{subtitle}</h4>
-
-                    <h4>Written By {authors}</h4>
-                  </>
-                )}
+            <Row spacing='row align-self-center d-flex justify-content-center'>
+              <div className='col-4'>
+                <ImageContainer thumbnail={thumbnail} />
               </div>
-              <ButtonContainer
-                link={link}
-                onClick={onClick}
-                handleSave={handleSave}
-                saved={saved}
-                delete={handleDelete}
-                id={id}
-              />
+              <div className='col-3'>
+                <div className='card-title text-left'>
+                  <h2 className='display-6'>{title}</h2>
+                  {subtitle === undefined ? (
+                    <>
+                      <h5>Written By {authors}</h5>
+                    </>
+                  ) : (
+                    <>
+                      <h4>{subtitle}</h4>
+
+                      <h4>Written By {authors}</h4>
+                    </>
+                  )}
+                </div>
+              </div>
+              <div className='col-2'>
+                <ButtonContainer
+                  link={link}
+                  onClick={onClick}
+                  handleSave={handleSave}
+                  saved={saved}
+                  delete={handleDelete}
+                  id={id}
+                />
+              </div>
             </Row>
           </Card>
         </>
@@ -73,8 +79,8 @@ function Book({
                 onClick={onClick}
                 handleSave={handleSave}
                 saved={saved}
-                  delete={handleDelete}
-                  id={id}
+                delete={handleDelete}
+                id={id}
               />
             </Row>
             <div className='card border-light mb-3'>
