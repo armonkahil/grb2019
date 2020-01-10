@@ -31,14 +31,15 @@ export function SaveBtn(props) {
 export function ViewBtn(props) {
   return (
     <>
-      <button
+      <a
         className='btn btn-success active'
         href={props.link}
         target={'_blank'}
+        onClick={props.onClick}
         {...props}
       >
         View
-      </button>
+      </a>
     </>
   )
 }
