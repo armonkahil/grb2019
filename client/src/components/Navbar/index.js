@@ -21,7 +21,7 @@ function Navbar() {
       <nav className='navbar navbar-expand-lg fixed-top navbar-light text-dark'>
         <button
           onClick={toggleNavbar}
-          className={`${classTwo}`}
+          className={`${classTwo} bg-light`}
           type='button'
           data-toggle='collapse'
           data-target='#navbarResponsive'
@@ -31,8 +31,8 @@ function Navbar() {
         >
           <span className='navbar-toggler-icon' />
         </button>
-        <div className={`${classOne}`} id='navbarResponsive'>
-          <h3>Google Books</h3>
+        <div className={`${classOne} bg-light pl-2`} id='navbarResponsive'>
+          <h1 className='banner'>(React) Google Books</h1>
           <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
             <li className='nav-item active'>
               <Link className='nav-link' to='/'>
@@ -45,6 +45,18 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          <div className="nav-item">
+            <a className="" href="https://www.google.com">
+            Powered by
+          <img
+            src='https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+            className=' mx-2 mb-0 h1 img-fluid img-responsive'
+            width='90'
+                height='50'
+                alt='Google Logo'
+            ></img>
+            </a>
+          </div>
         </div>
       </nav>
     </>

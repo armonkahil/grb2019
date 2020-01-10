@@ -6,7 +6,7 @@ function Jumbotron({ children, title, lead }) {
     <div className="jumbotron jumbotron-fluid text-light">
       <div className="container text-center">
         <h1 className="display-3">{title}</h1>
-        <h1 className="display-5">
+        <h1 className="display-5 display-md-6">
           {lead}
         </h1>
       </div>{children}
