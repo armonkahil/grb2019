@@ -17,9 +17,12 @@ export default {
     return res.data || []
   },
   //Saves a book to the database
+  // saveBook: async (bookData) => {
+  //   let res = await axios.post("/api/books", bookData)
+  //   return res.data || [];
+  // }
   saveBook: async (bookData) => {
-    let res = await axios.post("/api/books", bookData)
-    return res.data || [];
+    return axios.post("/api/books", bookData)
   }
   
 }

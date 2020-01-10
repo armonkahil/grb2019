@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -20,7 +21,7 @@ app.use(routes)
  mongoose.Promise = global.Promise
 
  
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/googlebooks', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/googleBooks', {
     //  useCreateIndex: true,
     useNewUrlParser: true
   })
