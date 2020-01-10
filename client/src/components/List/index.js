@@ -3,7 +3,7 @@ import "./style.css";
 
 export function List({ children }) {
   return (
-    <div className="list-overflow-container">
+    <div className="list-overflow-container border-none">
       <h1 className="text-light">Results</h1>
       <ul className="list-group">{children}</ul>
     </div>

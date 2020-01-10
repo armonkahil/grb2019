@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d1d3f97c.chunk.css",
+    "main.js": "/static/js/main.c7efd185.chunk.js",
+    "main.js.map": "/static/js/main.c7efd185.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0953d9ee.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0953d9ee.js.map",
+    "static/js/2.8bd1efe3.chunk.js": "/static/js/2.8bd1efe3.chunk.js",
+    "static/js/2.8bd1efe3.chunk.js.map": "/static/js/2.8bd1efe3.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.ad77357463ef5d13f6092068128c6242.js": "/precache-manifest.ad77357463ef5d13f6092068128c6242.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.d1d3f97c.chunk.css.map": "/static/css/main.d1d3f97c.chunk.css.map",
+    "static/js/2.8bd1efe3.chunk.js.LICENSE": "/static/js/2.8bd1efe3.chunk.js.LICENSE",
+    "static/media/style.css": "/static/media/library-university-books-students-12064.5e85f5ef.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0953d9ee.js",
+    "static/js/2.8bd1efe3.chunk.js",
+    "static/css/main.d1d3f97c.chunk.css",
+    "static/js/main.c7efd185.chunk.js"
+  ]
+}
