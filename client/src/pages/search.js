@@ -129,7 +129,7 @@ function Search() {
               ))}
             </List>
           ) : (
-            <h3 className='text-center'>No Results to Display</h3>
+            <h3 className='text-center text-light'>No Results to Display</h3>
           )}
         </Column>
       </Row>
