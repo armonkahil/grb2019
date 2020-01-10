@@ -18,7 +18,7 @@ app.use(routes)
 // Connect to the Mongo DB
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/googlebooks', {
-  // useCreateIndex: true,
+   useCreateIndex: true,
   useNewUrlParser: true
 })
  

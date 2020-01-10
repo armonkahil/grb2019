@@ -48,7 +48,7 @@ function Search() {
         console.log(res)
         updateBooks(bookSaved)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err.response))
   }
 
   const updateBooks = bookSaved => {
