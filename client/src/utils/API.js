@@ -21,7 +21,7 @@ export default {
   //   let res = await axios.post("/api/books", bookData)
   //   return res.data || [];
   // }
-  saveBook: async (bookData) => {
+  saveBook: (bookData) => {
     return axios.post("/api/books", bookData)
   }
   
