@@ -7,15 +7,19 @@ import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 
+// Search Page
 function Search() {
+  // hooks
   const [books, setBooks] = useState('')
   const [search, setSearch] = useState('')
   const [input, setInput] = useState('')
 
   useEffect(() => {
+    // if search field is empty, stop.
     if (!search) {
       return
     }
+    // Axios call to source Google Books API
     API.getGoogleSearchBooks(search)
       .then(res => {
         if (res.data.length === 0) {
@@ -24,33 +28,38 @@ function Search() {
         if (res.data.status === 'error') {
           throw new Error(res.data.message)
         }
+        // set response data to books
         setBooks(res.data.items)
+        console.log(res.data.items)
       })
       .catch(err => console.log(err))
+    // [Search] =  run every time search is updated
   }, [search])
-  // handle any changes to the input fields
+
+  // handle input field changes
   const handleInputChange = event => {
     setInput(event.target.value)
     console.log(search)
   }
-
+  // handle search Button event
   const handleSetSubmit = event => {
-    console.log(event)
+    console.log(event.target)
     setSearch(input)
   }
-
+// handle save book button event
   const handleSave = bookSaved => {
     console.log('save button hit')
     console.log('book Saved', bookSaved)
-
+// Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
       .then(res => {
         console.log(res)
+        // update books
         updateBooks(bookSaved)
       })
       .catch(err => console.log(err.response))
   }
-
+        // update books hook
   const updateBooks = bookSaved => {
     console.log('bookSaved:', bookSaved)
     const newBooks = books.filter(book => bookSaved._id !== book.id)
@@ -59,20 +68,24 @@ function Search() {
 
   return (
     <>
+      {/* Title Banner */}
       <Jumbotron
         title='(React) Google Books Search'
         lead='Search for and Save Books of Interest'
       />
       <Row spacing={'justify-content-center mx-auto my-3'}>
         <Column>
+          {/* Search Container */}
           <SearchThis
             handleInputChange={handleInputChange}
             handleSubmit={handleSetSubmit}
           />
         </Column>
       </Row>
+      {/* Results Container */}
       <Row spacing={'justify-content-center mx-auto my-3'}>
         <Column>
+          {/* if books contains data */}
           {books.length ? (
             <List>
               {books.map(book => (
@@ -82,14 +95,18 @@ function Search() {
                   link={book.volumeInfo.previewLink}
                   title={book.volumeInfo.title}
                   subtitle={book.volumeInfo.subtitle}
+                  // Convert Authors array to a string
                   authors={
                     book.volumeInfo.authors
                       ? book.volumeInfo.authors.join(', ')
                       : ''
                   }
                   description={book.volumeInfo.description}
-                  thumbnail={book.volumeInfo.imageLinks.thumbnail}
-                  smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
+                  // if thumbnail is empty
+                  thumbnail={
+                    book.volumeInfo.imageLinks.thumbnail ||
+                    book.volumeInfo.imageLinks.smallThumbnail
+                  }
                   saved={false}
                   book={book}
                   value={book}
@@ -101,7 +118,9 @@ function Search() {
                         ? book.volumeInfo.authors.join(', ')
                         : '',
                       description: book.volumeInfo.description,
-                      image: book.volumeInfo.imageLinks.thumbnail,
+                      image:
+                        book.volumeInfo.imageLinks.thumbnail ||
+                        book.volumeInfo.imageLinks.smallThumbnail,
                       link: book.volumeInfo.infoLink,
                       saved: true
                     })

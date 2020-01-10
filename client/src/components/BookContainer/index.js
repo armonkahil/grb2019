@@ -24,7 +24,7 @@ function Book({
         <>
           <Card>
             <Row spacing='row align-self-center'>
-              <ImageContainer />
+              <ImageContainer thumbnail={thumbnail} />
               <div className='card-title text-left'>
                 <h3 className='display-6'>{title}</h3>
                 {subtitle === undefined ? (
