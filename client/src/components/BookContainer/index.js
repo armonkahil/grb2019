@@ -22,7 +22,7 @@ function Book({
     <>
       {description === undefined ? (
         <>
-          <Card>
+          <Card saved={saved}>
             <Row spacing='row align-self-center d-flex justify-content-center'>
               <div className='col-4'>
                 <ImageContainer thumbnail={thumbnail} />

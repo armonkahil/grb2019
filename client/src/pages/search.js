@@ -6,19 +6,22 @@ import Column from '../components/Column'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
+import Spinner from '../components/Spinner'
 
 // Search Page
 function Search() {
   // hooks
-  const [books, setBooks] = useState('')
+  const [books, setBooks] = useState([])
   const [search, setSearch] = useState('')
   const [input, setInput] = useState('')
+  const [loading, setLoading ] = useState(false)
 
   useEffect(() => {
     // if search field is empty, stop.
     if (!search) {
       return
     }
+    setLoading(true)
     // Axios call to source Google Books API
     API.getGoogleSearchBooks(search)
       .then(res => {
@@ -30,6 +33,7 @@ function Search() {
         }
         // set response data to books
         setBooks(res.data.items)
+        setLoading(false)
         console.log(res.data.items)
       })
       .catch(err => console.log(err))
@@ -38,34 +42,37 @@ function Search() {
 
   // handle input field changes
   const handleInputChange = event => {
-    setInput(event.target.value)
-    console.log(search)
+    const newInput = event.target.value.replace( /\s/g, '+')
+    console.log('newInput:', newInput)
+    setInput(newInput)
   }
   // handle search Button event
   const handleSetSubmit = event => {
-    console.log(event.target)
+    event.preventDefault()
     setSearch(input)
   }
 // handle save book button event
   const handleSave = bookSaved => {
     console.log('save button hit')
-    console.log('book Saved', bookSaved)
-// Source Axios to send data to MongoDB
+    // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
-      .then(res => {
-        console.log(res)
-        // update books
-        updateBooks(bookSaved)
+    .then(res => {
+      console.log(res)
+      // update booksnpm d
+      updateBooks(bookSaved)
+      console.log('book Saved', bookSaved)
       })
       .catch(err => console.log(err.response))
   }
         // update books hook
   const updateBooks = bookSaved => {
-    console.log('bookSaved:', bookSaved)
     const newBooks = books.filter(book => bookSaved._id !== book.id)
     setBooks(newBooks)
   }
-
+let gettingBooks
+    if (loading) {
+      gettingBooks = <Spinner />
+    }
   return (
     <>
       {/* Title Banner */}
@@ -85,12 +92,13 @@ function Search() {
       {/* Results Container */}
       <Row spacing={'justify-content-center mx-auto my-3'}>
         <Column>
+          {gettingBooks}
           {/* if books contains data */}
           {books.length ? (
             <List>
               {books.map(book => (
                 <Book
-                  key={book.id}
+                  key={book.etag}
                   id={book.id}
                   link={book.volumeInfo.previewLink}
                   title={book.volumeInfo.title}
@@ -104,8 +112,8 @@ function Search() {
                   description={book.volumeInfo.description}
                   // if thumbnail is empty
                   thumbnail={
-                    book.volumeInfo.imageLinks.thumbnail ||
-                    book.volumeInfo.imageLinks.smallThumbnail
+                    book.volumeInfo.imageLinks ?
+                    book.volumeInfo.imageLinks.smallThumbnail : ''
                   }
                   saved={false}
                   book={book}
@@ -113,6 +121,7 @@ function Search() {
                   handleSave={() =>
                     handleSave({
                       _id: book.id,
+                      etag: book.etag,
                       title: book.volumeInfo.title,
                       authors: book.volumeInfo.authors
                         ? book.volumeInfo.authors.join(', ')
@@ -120,7 +129,8 @@ function Search() {
                       description: book.volumeInfo.description,
                       image:
                         book.volumeInfo.imageLinks.thumbnail ||
-                        book.volumeInfo.imageLinks.smallThumbnail,
+                        book.volumeInfo.imageLinks.smallThumbnail ||
+                        ' ',
                       link: book.volumeInfo.infoLink,
                       saved: true
                     })

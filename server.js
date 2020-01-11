@@ -6,7 +6,8 @@ const routes = require('./routes')
 const app = express()
 
 const PORT = process.env.PORT || 3001
-
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/googleBooks'
+console.log('MONGODB_URI:', MONGODB_URI)
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -19,8 +20,8 @@ app.use(routes)
 
 // Connect to the Mongo DB
  mongoose.Promise = global.Promise
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/googleBooks', { useNewUrlParser: true})
+//  console.log('global:', global.Promise)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true})
 mongoose.connection.on('error', err => {
   logError(err)
 })
