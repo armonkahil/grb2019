@@ -14,7 +14,7 @@ function Search() {
   const [books, setBooks] = useState([])
   const [search, setSearch] = useState('')
   const [input, setInput] = useState('')
-  const [loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     // if search field is empty, stop.
@@ -42,7 +42,7 @@ function Search() {
 
   // handle input field changes
   const handleInputChange = event => {
-    const newInput = event.target.value.replace( /\s/g, '+')
+    const newInput = event.target.value.replace(/\s/g, '+')
     console.log('newInput:', newInput)
     setInput(newInput)
   }
@@ -51,28 +51,29 @@ function Search() {
     event.preventDefault()
     setSearch(input)
   }
-// handle save book button event
+  // handle save book button event
   const handleSave = bookSaved => {
     console.log('save button hit')
     // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
-    .then(res => {
-      console.log(res)
-      // update booksnpm d
-      updateBooks(bookSaved)
-      console.log('book Saved', bookSaved)
+      .then(res => {
+        console.log(res)
+        // update books
+        updateBooks(bookSaved)
+        console.log('book Saved', bookSaved)
       })
       .catch(err => console.log(err.response))
   }
-        // update books hook
+  // update books hook
   const updateBooks = bookSaved => {
     const newBooks = books.filter(book => bookSaved._id !== book.id)
     setBooks(newBooks)
   }
-let gettingBooks
-    if (loading) {
-      gettingBooks = <Spinner />
-    }
+
+  let gettingBooks
+  if (loading) {
+    gettingBooks = <Spinner />
+  }
   return (
     <>
       {/* Title Banner */}
@@ -112,8 +113,9 @@ let gettingBooks
                   description={book.volumeInfo.description}
                   // if thumbnail is empty
                   thumbnail={
-                    book.volumeInfo.imageLinks ?
-                    book.volumeInfo.imageLinks.smallThumbnail : ''
+                    book.volumeInfo.imageLinks
+                      ? book.volumeInfo.imageLinks.smallThumbnail
+                      : ''
                   }
                   saved={false}
                   book={book}
