@@ -10,7 +10,7 @@ class Saved extends Component {
   state = {
     savedBooks: [],
     loading: false,
-    error: ""
+    error: ''
   }
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class Saved extends Component {
     this.setState({ savedBooks: newBooks, loading: false })
     console.log(newBooks)
   }
-
+  
   render() {
     return (
       <>

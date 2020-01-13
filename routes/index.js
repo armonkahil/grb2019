@@ -11,5 +11,7 @@ router.use(function(req, res) {
     path.join(__dirname, 'client', 'build', '../client/build/index.html')
   )
 })
-
+router.get("/", (req, res) => {
+  res.send({ response: "I am alive" }).status(200);
+})
 module.exports = router

@@ -4,8 +4,11 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const routes = require('./routes')
 const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io').listen(server)
 
 const PORT = process.env.PORT || 3001
+
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/armon'
 console.log('MONGODB_URI:', MONGODB_URI)
 // Define middleware here
