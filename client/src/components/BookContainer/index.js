@@ -27,7 +27,7 @@ function Book({
                 <ImageContainer thumbnail={thumbnail} />
               </div>
               <div className='col-3'>
-                <div className='card-title text-left'>
+                <div className='media-title text-left'>
                   <h2 className='display-6'>{title}</h2>
                   {subtitle === undefined ? (
                     <>
@@ -58,8 +58,8 @@ function Book({
       ) : (
         <>
           <Card>
-            <Row spacing='row container-fluid justify-content-between'>
-              <div className='card-title text-left'>
+            <Row spacing='row container-fluid justify-content-between pl-4'>
+              <div className='media-title text-left'>
                 <h6 className='display-6'>{title}</h6>
                 {subtitle === undefined ? (
                   <>
@@ -87,8 +87,8 @@ function Book({
                 <ImageContainer thumbnail={thumbnail} />
 
                 <div className='col'>
-                  <div className='card-body'>
-                    <p className='card-text overflow-auto text-left'>
+                  <div className='card-body overflow-auto'>
+                    <p className='card-text overflow-auto text-justify'>
                       {description}
                     </p>
                   </div>

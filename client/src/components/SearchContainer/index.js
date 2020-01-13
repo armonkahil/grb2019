@@ -5,12 +5,10 @@ function SearchThis(props) {
   return (
     <div className='card card-body'>
       <div className='row container-fluid'>
-        <div className='card-title text-left'>
-          <h1>Book Search</h1>
-        </div>
       </div>
       <div className='row container-fluid'>
         <div className='card-body text-center'>
+          <h1 className="card-title ">Book Search</h1>
           <input
             className='form-control'
             type='text'
@@ -19,8 +17,8 @@ function SearchThis(props) {
             value={props.search}
             onChange={props.handleInputChange}
           ></input>
-        </div>
         <SearchBtn handleSubmit={props.handleSubmit} />
+        </div>
       </div>
     </div>
   )

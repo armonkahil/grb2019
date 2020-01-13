@@ -3,7 +3,7 @@ import { SaveBtn, ViewBtn, DeleteBtn } from '../Buttons'
 
 function ButtonContainer(props) {
   return (
-    <div className="">
+    <div className="btn btn-sm-group">
       {!props.saved ? (
         <>
           <SaveBtn key={props.id} onClick={props.handleSave} />

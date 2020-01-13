@@ -7,10 +7,10 @@ export function SearchBtn(props) {
         <div className='d-flex justify-content-end'>
           <button
             type='button'
-            className='btn btn-primary mx-2'
+            className='btn btn-primary my-2'
             onClick={props.handleSubmit}
           >
-            Search
+            Click Here to Search
           </button>
         </div>
       </div>
