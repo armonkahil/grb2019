@@ -6,14 +6,14 @@ const routes = require('./routes')
 const app = express()
 
 const PORT = process.env.PORT || 3001
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/googleBooks'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/armon'
 console.log('MONGODB_URI:', MONGODB_URI)
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888')
+  res.setHeader('Access-Control-Allow-Origin', `http://localhost:${PORT}`)
 
   // Request methods you wish to allow
   res.setHeader(
@@ -43,7 +43,6 @@ app.use(routes)
 //  console.log('global:', global.Promise)
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useFindAndModify', false)
-// mongoose.set('useCreateIndex', true)
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true })
 
 // Start the API server

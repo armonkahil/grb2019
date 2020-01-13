@@ -6,7 +6,7 @@ import Column from '../components/Column'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
-import Spinner from '../components/Spinner'
+import NoResults from '../components/NoResults'
 
 // Search Page
 function Search() {
@@ -15,6 +15,7 @@ function Search() {
   const [search, setSearch] = useState('')
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState({})
 
   useEffect(() => {
     // if search field is empty, stop.
@@ -42,7 +43,7 @@ function Search() {
 
   // handle input field changes
   const handleInputChange = event => {
-    const newInput = event.target.value.replace(/\s/g, '+')
+    const newInput = event.target.value.trim().replace(/\s/g, '+')
     console.log('newInput:', newInput)
     setInput(newInput)
   }
@@ -53,27 +54,29 @@ function Search() {
   }
   // handle save book button event
   const handleSave = bookSaved => {
-    console.log('save button hit')
     // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
       .then(res => {
         console.log(res)
         // update books
         updateBooks(bookSaved)
-        console.log('book Saved', bookSaved)
       })
-      .catch(err => console.log(err.response))
+      .catch(err => {
+        setError(err)
+        console.log(err.response)
+        err.response.data.code === 11000
+          ? alert('Book already saved')
+          : console.log(error)
+      })
   }
   // update books hook
   const updateBooks = bookSaved => {
+    console.log('bookSaved:', bookSaved)
+
     const newBooks = books.filter(book => bookSaved._id !== book.id)
     setBooks(newBooks)
   }
 
-  let gettingBooks
-  if (loading) {
-    gettingBooks = <Spinner />
-  }
 
   return (
     <>
@@ -82,83 +85,73 @@ function Search() {
         title='(React) Google Books Search'
         lead='Search for and Save Books of Interest'
       />
-      <Row spacing={'justify-content-center mx-auto my-3'}>
-        <Column>
-          {/* Search Container */}
-          <SearchThis
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSetSubmit}
-          />
-        </Column>
-      </Row>
+      <Row spacing={'justify-content-center mx-auto my-3'} />
+      <Column />
+      {/* Search Container */}
+      <SearchThis
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSetSubmit}
+      />
       {/* Results Container */}
-      <Row spacing={'justify-content-center mx-auto my-3'}>
-        <Column>
-          {gettingBooks}
-          {/* if books contains data */}
-          {books.length ? (
-            <List>
-              {books.map(book => (
-                <Book
-                  key={book.etag}
-                  id={book.id}
-                  link={book.volumeInfo.previewLink}
-                  title={book.volumeInfo.title}
-                  subtitle={book.volumeInfo.subtitle}
-                  // Convert Authors array to a string
-                  authors={
-                    book.volumeInfo.authors
+      <Row spacing={'justify-content-center mx-auto my-3'} />
+      <Column />
+      {/* if books contains data */}
+      {books.length ? (
+          <List>
+            {books.map(book => (
+              <Book
+                key={book.etag}
+                id={book.id}
+                link={book.volumeInfo.previewLink}
+                title={book.volumeInfo.title}
+                subtitle={book.volumeInfo.subtitle}
+                // Convert Authors array to a string
+                authors={
+                  book.volumeInfo.authors
+                    ? book.volumeInfo.authors.join(', ')
+                    : 'No author listed'
+                }
+                description={
+                  book.volumeInfo.description
+                    ? book.volumeInfo.description
+                    : 'No Description'
+                }
+                thumbnail={
+                  // // if book.volume.imageLinks exist
+                  book.volumeInfo.imageLinks
+                    ? book.volumeInfo.imageLinks.thumbNail ||
+                      book.volumeInfo.imageLinks.smallThumbnail
+                    : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+                }
+                saved={false}
+                book={book}
+                value={book}
+                handleSave={() =>
+                  handleSave({
+                    _id: book.id,
+                    etag: book.etag,
+                    title: book.volumeInfo.title,
+                    authors: book.volumeInfo.authors
                       ? book.volumeInfo.authors.join(', ')
-                      : 'No author listed'
-                  }
-                  description={
-                    book.volumeInfo.description
+                      : 'No authors listed',
+                    description: book.volumeInfo.description
                       ? book.volumeInfo.description
-                      : 'No Description'
-                  }
-                  thumbnail={
-                    // // if book.volume.imageLinks exist
-                    book.volumeInfo.imageLinks
-                      ? (
-                        book.volumeInfo.imageLinks.thumbNail ||
+                      : 'No Description provided',
+                    image: book.volumeInfo.imageLinks
+                      ? book.volumeInfo.imageLinks.thumbNail ||
                         book.volumeInfo.imageLinks.smallThumbnail
-                      ) : (
-                        'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
-                      )
-                  }
-                  saved={false}
-                  book={book}
-                  value={book}
-                  handleSave={() =>
-                    handleSave({
-                      _id: book.id,
-                      etag: book.etag,
-                      title: book.volumeInfo.title,
-                      authors: book.volumeInfo.authors
-                        ? book.volumeInfo.authors.join(', ')
-                        : 'No authors listed',
-                      description: book.volumeInfo.description ?
-                        book.volumeInfo.description
-                        : 'No Description provided',
-                      image: book.volumeInfo.imageLinks
-                        ? (
-                          book.volumeInfo.imageLinks.thumbNail ||
-                          book.volumeInfo.imageLinks.smallThumbnail
-                        ) : (
-                          'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
-                        ),
-                      link: book.volumeInfo.infoLink,
-                      saved: true
-                    })
-                  }
-                />
-              ))}
-            </List>
-          ) : (
-            <h3 className='text-center text-light'>No Results to Display</h3>
-          )}
-        </Column>
-      </Row>
+                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
+                    link: book.volumeInfo.infoLink,
+                    saved: true
+                  })
+                }
+              />
+            ))}
+          </List>
+        ) : (
+          <NoResults loading={loading} />
+        )
+      }
     </>
   )
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   // Google Books search
-  getGoogleSearchBooks: (search) => {
+  getGoogleSearchBooks: search => {
     const queryURL = `https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=15`
     console.log(`queryURL: ${queryURL}`)
     return axios.get(queryURL)
@@ -18,7 +18,7 @@ export default {
     return res.data || []
   },
   // delete a book
-  deleteBook: (id) => {
+  deleteBook: id => {
     return axios.delete('/api/books/' + id)
   }
 }
