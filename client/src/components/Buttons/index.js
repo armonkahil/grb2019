@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
 export function SearchBtn(props) {
   return (
     <>
-      <div className="row container d-flex align-self-end">
-        <div className="d-flex justify-content-end">
+      <div className='row container d-flex align-self-end'>
+        <div className='d-flex justify-content-end'>
           <button
-            type="button"
-            className="btn btn-primary mx-2"
+            type='button'
+            className='btn btn-primary mx-2'
             onClick={props.handleSubmit}
           >
             Search
@@ -15,17 +15,21 @@ export function SearchBtn(props) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export function SaveBtn(props) {
   return (
     <>
-      <button type="button" className={`btn btn-primary mx-2 ${props["data-value"]}`} {...props} >
+      <button
+        type='button'
+        className={`btn btn-primary mx-2 ${props['data-value']}`}
+        {...props}
+      >
         Save
       </button>
     </>
-  );
+  )
 }
 
 export function ViewBtn(props) {
@@ -46,9 +50,13 @@ export function ViewBtn(props) {
 
 export function DeleteBtn(props) {
   return (
-    <span className="btn btn-info mx-2 delete-btn float-right" {...props} role="button" tabIndex="0">
+    <span
+      className='btn btn-info mx-2 delete-btn float-right'
+      {...props}
+      role='button'
+      tabIndex='0'
+    >
       ✗
     </span>
-  );
+  )
 }
-

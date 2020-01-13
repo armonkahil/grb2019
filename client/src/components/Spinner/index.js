@@ -1,7 +1,7 @@
 import React from 'react'
-import "./index.css"
+import './index.css'
 
 function Spinner() {
-  return <div className='loader'>Loading...</div>
+  return <div className='loader mx-auto'>Loading...</div>
 }
- export default Spinner
+export default Spinner

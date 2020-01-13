@@ -45,16 +45,16 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          <div className="nav-item">
-            <a className="" href="https://www.google.com">
-            Powered by
-          <img
-            src='https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
-            className=' mx-2 mb-0 h1 img-fluid img-responsive'
-            width='90'
+          <div className='nav-item'>
+            <a className='' href='https://www.google.com'>
+              Powered by
+              <img
+                src='https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+                className=' mx-2 mb-0 h1 img-fluid img-responsive'
+                width='90'
                 height='50'
                 alt='Google Logo'
-            ></img>
+              ></img>
             </a>
           </div>
         </div>

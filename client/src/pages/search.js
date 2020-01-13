@@ -74,6 +74,7 @@ function Search() {
   if (loading) {
     gettingBooks = <Spinner />
   }
+
   return (
     <>
       {/* Title Banner */}
@@ -108,14 +109,22 @@ function Search() {
                   authors={
                     book.volumeInfo.authors
                       ? book.volumeInfo.authors.join(', ')
-                      : ''
+                      : 'No author listed'
                   }
-                  description={book.volumeInfo.description}
-                  // if thumbnail is empty
+                  description={
+                    book.volumeInfo.description
+                      ? book.volumeInfo.description
+                      : 'No Description'
+                  }
                   thumbnail={
+                    // // if book.volume.imageLinks exist
                     book.volumeInfo.imageLinks
-                      ? book.volumeInfo.imageLinks.smallThumbnail
-                      : ''
+                      ? (
+                        book.volumeInfo.imageLinks.thumbNail ||
+                        book.volumeInfo.imageLinks.smallThumbnail
+                      ) : (
+                        'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+                      )
                   }
                   saved={false}
                   book={book}
@@ -127,12 +136,17 @@ function Search() {
                       title: book.volumeInfo.title,
                       authors: book.volumeInfo.authors
                         ? book.volumeInfo.authors.join(', ')
-                        : '',
-                      description: book.volumeInfo.description,
-                      image:
-                        book.volumeInfo.imageLinks.thumbnail ||
-                        book.volumeInfo.imageLinks.smallThumbnail ||
-                        ' ',
+                        : 'No authors listed',
+                      description: book.volumeInfo.description ?
+                        book.volumeInfo.description
+                        : 'No Description provided',
+                      image: book.volumeInfo.imageLinks
+                        ? (
+                          book.volumeInfo.imageLinks.thumbNail ||
+                          book.volumeInfo.imageLinks.smallThumbnail
+                        ) : (
+                          'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+                        ),
                       link: book.volumeInfo.infoLink,
                       saved: true
                     })

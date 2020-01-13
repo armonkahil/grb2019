@@ -18,6 +18,9 @@ class Saved extends Component {
     this.loadSavedBooks()
     console.log(this.state.savedBooks)
   }
+  componentWillUnmount(book) {
+    this.updateBooks(book)
+  }
 
   loadSavedBooks = () => {
     this.setState({ loading: true })
@@ -30,15 +33,27 @@ class Saved extends Component {
 
   handleDelete = event => {
     console.log(event.target.id)
-    API.deleteBook(event.target.id)
-      .then(res => console.log(res))
+    const bookDeleted =  event.target.id
+    API.deleteBook(bookDeleted)
+      .then(res => {
+        console.log(res)
+        this.loadSavedBooks()
+      })
       .catch(err => console.log(err))
   }
-
+ updateBooks = bookSaved => {
+    const newBooks = this.state.savedBooks.filter(book => bookSaved._id !== book.id)
+   this.setState({ savedBooks: newBooks, loading: false })
+  }
+  
   render() {
     let gettingBooks
     if (this.state.loading) {
       gettingBooks = <Spinner />
+    } else {
+      gettingBooks = (
+        <h3 className='text-center text-light'>No Results to Display</h3>
+      )
     }
 
     return (
@@ -66,12 +81,12 @@ class Saved extends Component {
                     value={book}
                     saved={book.saved}
                     handleDelete={this.handleDelete}
-                    onClick={this.onClick}
+                    onClick={() => this.onClick}
                   />
                 ))}
               </List>
             ) : (
-              <h3 className='text-center text-light'>No Results to Display</h3>
+              { gettingBooks }
             )}
           </Column>
         </Row>

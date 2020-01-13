@@ -20,7 +20,7 @@ function Book({
 }) {
   return (
     <>
-      {description === undefined ? (
+      {description === "No Desc" ? (
         <>
           <Card saved={saved}>
             <Row spacing='row align-self-center d-flex justify-content-center'>
