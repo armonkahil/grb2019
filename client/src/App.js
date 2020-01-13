@@ -7,7 +7,7 @@ import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <div>
+    <div className="mx-auto">
       <Router>
         <Navbar />
         <Switch>

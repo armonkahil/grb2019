@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Col(props) {
+function Column (props) {
   return (
-    <div className='col-lg-10 col-xl-11 d-flex align-content-center text-center mx-auto container-fluid justify-content-center'>
+    <div className='text-center justify-content-center align-self-center d-flex justify-content-center'>
       {props.children}
     </div>
   )
 }
 
-export default Col
+export default Column

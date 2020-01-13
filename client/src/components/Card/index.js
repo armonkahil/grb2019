@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Card(props) {
+function Card (props) {
   return (
-    <div className='card shadow-lg border-light m-3 px-1 animated fadeInUpBig'>
+    <div className='card container col bg-gradient-light m-5 p-3 animated fadeInUpBig'>
       {props.children}
     </div>
   )

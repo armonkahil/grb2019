@@ -108,8 +108,8 @@ function Search() {
               // Convert Authors array to a string
               authors={
                 book.volumeInfo.authors
-                  ? book.volumeInfo.authors.join(', ')
-                  : 'No author listed'
+                  ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                  : 'No authors listed'
               }
               description={
                 book.volumeInfo.description
@@ -132,7 +132,7 @@ function Search() {
                   etag: book.etag,
                   title: book.volumeInfo.title,
                   authors: book.volumeInfo.authors
-                    ? book.volumeInfo.authors.join(', ')
+                    ? ` Written by ${book.volumeInfo.authors.join(', ')}`
                     : 'No authors listed',
                   description: book.volumeInfo.description
                     ? book.volumeInfo.description

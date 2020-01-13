@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../Card'
 import Row from '../Row'
+import Column from '../Column'
 import ImageContainer from '../ImageContainer'
 import ButtonContainer from '../ButtonContainer'
 
@@ -19,85 +20,52 @@ function Book({
 }) {
   return (
     <>
-      {description === "No Desc" ? (
-        <>
-          <Card saved={saved}>
-            <Row spacing='row align-self-center d-flex justify-content-center'>
-              <div className='col-4'>
-                <ImageContainer thumbnail={thumbnail} />
-              </div>
-              <div className='col-3'>
-                <div className='media-title text-left'>
-                  <h2 className='display-6'>{title}</h2>
-                  {subtitle === undefined ? (
-                    <>
-                      <h5>Written By {authors}</h5>
-                    </>
-                  ) : (
-                    <>
-                      <h4>{subtitle}</h4>
-
-                      <h4>Written By {authors}</h4>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className='col-2'>
-                <ButtonContainer
-                  link={link}
-                  onClick={onClick}
-                  handleSave={handleSave}
-                  saved={saved}
-                  delete={handleDelete}
-                  id={id}
-                />
-              </div>
-            </Row>
-          </Card>
-        </>
-      ) : (
-        <>
-          <Card>
-            <Row spacing='row container-fluid justify-content-between pl-4'>
-              <div className='media-title text-left'>
-                <h6 className='display-6'>{title}</h6>
+      <Card>
+        <Row spacing='container align-self-center'>
+          <Column>
+            <ImageContainer thumbnail={thumbnail} />
+          </Column>
+        </Row>
+        <Row>
+          <div className='card-title'>
+            <Column>
+              <Row spacing='container'>
+                <Row spacing='container'>
+                  <h3 className='display-6 Card-title'>{title}</h3>
+                </Row>
                 {subtitle === undefined ? (
                   <>
-                    <small>Written By {authors}</small>
+                    <h4 className='Card-subtitle font-italic'>{authors}</h4>
                   </>
                 ) : (
                   <>
-                    <small>{subtitle}</small>
-                    <br></br>
-                    <small>written By {authors}</small>
+                    <Row spacing='container-fluid my-1'>
+                      <h4 className='card-subtitle'>{subtitle}</h4>
+                    </Row>
+                    <Row spacing='container-fluid my-1'>
+                      <h4 className='card-subtitle'>{authors}</h4>
+                    </Row>
                   </>
                 )}
-              </div>
-              <ButtonContainer
-                link={link}
-                onClick={onClick}
-                handleSave={handleSave}
-                saved={saved}
-                delete={handleDelete}
-                id={id}
-              />
-            </Row>
-            <div className='card border-light mb-3'>
-              <Row>
-                <ImageContainer thumbnail={thumbnail} />
-
-                <div className='col'>
-                  <div className='card-body overflow-auto'>
-                    <p className='card-text overflow-auto text-justify'>
-                      {description}
-                    </p>
-                  </div>
-                </div>
               </Row>
-            </div>
-          </Card>
-        </>
-      )}
+            </Column>
+            <Row spacing='container'>
+              <p className='container text-center '>{description}</p>
+            </Row>
+          </div>
+        </Row>
+
+        <Row spacing='container justify-content-end pl-4'>
+          <ButtonContainer
+            link={link}
+            onClick={onClick}
+            handleSave={handleSave}
+            saved={saved}
+            delete={handleDelete}
+            id={id}
+          />
+        </Row>
+      </Card>
     </>
   )
 }

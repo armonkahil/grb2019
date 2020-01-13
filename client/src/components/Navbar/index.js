@@ -18,7 +18,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className='navbar navbar-expand-lg fixed-top navbar-light text-dark'>
+      <nav className='navbar navbar-expand-lg fixed-top text-dark m-0'>
         <button
           onClick={toggleNavbar}
           className={`${classTwo} bg-light`}
@@ -31,7 +31,7 @@ function Navbar() {
         >
           <span className='navbar-toggler-icon' />
         </button>
-        <div className={`${classOne} bg-light pl-2`} id='navbarResponsive'>
+        <div className={`${classOne} pl-2 fixed-top`} id='navbarResponsive'>
           <h1 className='banner'>(React) Google Books</h1>
           <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
             <li className='nav-item active'>
