@@ -50,6 +50,7 @@ function Search() {
   // handle search Button event
   const handleSetSubmit = event => {
     event.preventDefault()
+    setBooks([])
     setSearch(input)
   }
   // handle save book button event
@@ -77,7 +78,6 @@ function Search() {
     setBooks(newBooks)
   }
 
-
   return (
     <>
       {/* Title Banner */}
@@ -97,61 +97,60 @@ function Search() {
       <Column />
       {/* if books contains data */}
       {books.length ? (
-          <List>
-            {books.map(book => (
-              <Book
-                key={book.etag}
-                id={book.id}
-                link={book.volumeInfo.previewLink}
-                title={book.volumeInfo.title}
-                subtitle={book.volumeInfo.subtitle}
-                // Convert Authors array to a string
-                authors={
-                  book.volumeInfo.authors
+        <List>
+          {books.map(book => (
+            <Book
+              key={book.etag}
+              id={book.id}
+              link={book.volumeInfo.previewLink}
+              title={book.volumeInfo.title}
+              subtitle={book.volumeInfo.subtitle}
+              // Convert Authors array to a string
+              authors={
+                book.volumeInfo.authors
+                  ? book.volumeInfo.authors.join(', ')
+                  : 'No author listed'
+              }
+              description={
+                book.volumeInfo.description
+                  ? book.volumeInfo.description
+                  : 'No Description'
+              }
+              thumbnail={
+                // // if book.volume.imageLinks exist
+                book.volumeInfo.imageLinks
+                  ? book.volumeInfo.imageLinks.thumbNail ||
+                    book.volumeInfo.imageLinks.smallThumbnail
+                  : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+              }
+              saved={false}
+              book={book}
+              value={book}
+              handleSave={() =>
+                handleSave({
+                  _id: book.id,
+                  etag: book.etag,
+                  title: book.volumeInfo.title,
+                  authors: book.volumeInfo.authors
                     ? book.volumeInfo.authors.join(', ')
-                    : 'No author listed'
-                }
-                description={
-                  book.volumeInfo.description
+                    : 'No authors listed',
+                  description: book.volumeInfo.description
                     ? book.volumeInfo.description
-                    : 'No Description'
-                }
-                thumbnail={
-                  // // if book.volume.imageLinks exist
-                  book.volumeInfo.imageLinks
+                    : 'No Description provided',
+                  image: book.volumeInfo.imageLinks
                     ? book.volumeInfo.imageLinks.thumbNail ||
                       book.volumeInfo.imageLinks.smallThumbnail
-                    : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
-                }
-                saved={false}
-                book={book}
-                value={book}
-                handleSave={() =>
-                  handleSave({
-                    _id: book.id,
-                    etag: book.etag,
-                    title: book.volumeInfo.title,
-                    authors: book.volumeInfo.authors
-                      ? book.volumeInfo.authors.join(', ')
-                      : 'No authors listed',
-                    description: book.volumeInfo.description
-                      ? book.volumeInfo.description
-                      : 'No Description provided',
-                    image: book.volumeInfo.imageLinks
-                      ? book.volumeInfo.imageLinks.thumbNail ||
-                        book.volumeInfo.imageLinks.smallThumbnail
-                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
-                    link: book.volumeInfo.infoLink,
-                    saved: true
-                  })
-                }
-              />
-            ))}
-          </List>
-        ) : (
-          <NoResults loading={loading} />
-        )
-      }
+                    : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
+                  link: book.volumeInfo.infoLink,
+                  saved: true
+                })
+              }
+            />
+          ))}
+        </List>
+      ) : (
+        <NoResults loading={loading} />
+      )}
     </>
   )
 }

@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(routes)
 
 // Connect to the Mongo DB
- mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise
 //  console.log('global:', global.Promise)
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useFindAndModify', false)

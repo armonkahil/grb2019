@@ -9,7 +9,8 @@ import NoResults from '../components/NoResults'
 class Saved extends Component {
   state = {
     savedBooks: [],
-    loading: false
+    loading: false,
+    error: ""
   }
 
   componentDidMount() {

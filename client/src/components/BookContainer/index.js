@@ -1,5 +1,4 @@
 import React from 'react'
-import './style.css'
 import Card from '../Card'
 import Row from '../Row'
 import ImageContainer from '../ImageContainer'
