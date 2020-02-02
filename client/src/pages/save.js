@@ -23,6 +23,7 @@ class Saved extends Component {
       .then(res => {
         this.setState({ savedBooks: res, loading: false })
       })
+      .then(() => console.log(this.state.savedBooks))
       .catch(err => console.log(err))
   }
 
@@ -36,20 +37,15 @@ class Saved extends Component {
   }
 
   updateBooks = bookSaved => {
-    const newBooks = this.state.savedBooks.filter(
-      book => bookSaved._id !== book.id
-    )
+    const newBooks = this.state.savedBooks.filter(book => bookSaved._id !== book.id)
     this.setState({ savedBooks: newBooks, loading: false })
   }
-  
+
   render() {
     return (
       <>
         <Row />
-        <Jumbotron
-          title='(React) Google Books Search'
-          lead='Saved Books of Interest'
-        />
+        <Jumbotron title='(React) Google Books Search' lead='Saved Books of Interest' />
         <Row />
         <Column />
         {this.state.savedBooks ? (

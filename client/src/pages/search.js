@@ -69,6 +69,9 @@ function Search() {
           : console.log(error)
       })
   }
+  const httpsConverter = (link) => { 
+    return 'https' + link.substr(4, link.length - 1)
+  }
   // update books hook
   const updateBooks = bookSaved => {
     console.log('bookSaved:', bookSaved)
@@ -80,17 +83,11 @@ function Search() {
   return (
     <>
       {/* Title Banner */}
-      <Jumbotron
-        title='(React) Google Books Search'
-        lead='Search for and Save Books of Interest'
-      />
+      <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
       <Row spacing={'justify-content-center mx-auto my-3'} />
       <Column />
       {/* Search Container */}
-      <SearchThis
-        handleInputChange={handleInputChange}
-        handleSubmit={handleSetSubmit}
-      />
+      <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       {/* Results Container */}
       <Row spacing={'justify-content-center mx-auto my-3'} />
       <Column />
@@ -111,15 +108,14 @@ function Search() {
                   : 'No authors listed'
               }
               description={
-                book.volumeInfo.description
-                  ? book.volumeInfo.description
-                  : 'No Description'
+                book.volumeInfo.description ? book.volumeInfo.description : 'No Description'
               }
               thumbnail={
                 // // if book.volume.imageLinks exist
                 book.volumeInfo.imageLinks
-                  ? book.volumeInfo.imageLinks.thumbNail ||
-                    book.volumeInfo.imageLinks.smallThumbnail
+                  ? book.volumeInfo.imageLinks.thumbNail
+                    ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                    : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
                   : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
               }
               saved={false}
@@ -137,8 +133,9 @@ function Search() {
                     ? book.volumeInfo.description
                     : 'No Description provided',
                   image: book.volumeInfo.imageLinks
-                    ? book.volumeInfo.imageLinks.thumbNail ||
-                      book.volumeInfo.imageLinks.smallThumbnail
+                    ? book.volumeInfo.imageLinks.thumbNail
+                      ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                      : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
                     : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
                   link: book.volumeInfo.infoLink,
                   saved: true

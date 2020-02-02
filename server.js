@@ -12,13 +12,13 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/dismissal'
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(function(req, res, next) {
+
+app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', `http://localhost:${PORT}`)
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  res.setHeader('Set-Cookie', 'HttpOnly;Secure;SameSite=Strict')
   // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
 
@@ -29,6 +29,7 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next()
 })
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
