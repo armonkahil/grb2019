@@ -15,7 +15,6 @@ class Saved extends Component {
 
   componentDidMount() {
     this.loadSavedBooks()
-    console.log(this.state.savedBooks)
   }
 
   loadSavedBooks = () => {
@@ -23,17 +22,14 @@ class Saved extends Component {
     API.getBooks()
       .then(res => {
         this.setState({ savedBooks: res, loading: false })
-        console.log(this.state.savedBooks)
       })
       .catch(err => console.log(err))
   }
 
   handleDelete = event => {
-    console.log(event.target.id)
     const bookDeleted = event.target.id
     API.deleteBook(bookDeleted)
       .then(res => {
-        console.log(res)
         this.loadSavedBooks()
       })
       .catch(err => console.log(err))
@@ -44,7 +40,6 @@ class Saved extends Component {
       book => bookSaved._id !== book.id
     )
     this.setState({ savedBooks: newBooks, loading: false })
-    console.log(newBooks)
   }
   
   render() {

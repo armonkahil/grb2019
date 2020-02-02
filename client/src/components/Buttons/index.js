@@ -10,7 +10,7 @@ export function SearchBtn(props) {
             className='btn btn-primary my-2'
             onClick={props.handleSubmit}
           >
-            Click Here to Search
+            Submit
           </button>
         </div>
       </div>

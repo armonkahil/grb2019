@@ -4,13 +4,11 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const routes = require('./routes')
 const app = express()
-const server = require('http').createServer(app)
-const io = require('socket.io').listen(server)
+const gradient = require('gradient-string')
 
 const PORT = process.env.PORT || 3001
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/armon'
-console.log('MONGODB_URI:', MONGODB_URI)
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/dismissal'
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -19,11 +17,8 @@ app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', `http://localhost:${PORT}`)
 
   // Request methods you wish to allow
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-  )
-
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.setHeader('Set-Cookie', 'HttpOnly;Secure;SameSite=Strict')
   // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
 
@@ -46,9 +41,27 @@ mongoose.Promise = global.Promise
 //  console.log('global:', global.Promise)
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useFindAndModify', false)
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true })
+mongoose.set('useCreateIndex', true)
+mongoose.connect(MONGODB_URI)
 
 // Start the API server
-app.listen(PORT, function() {
+const server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
+})
+const io = require('socket.io')(server)
+
+// This is what the socket.io syntax is like, we will work this later
+io.on('connection', socket => {
+  console.log(gradient.vice('\nNew client connected'))
+
+  
+  socket.on('booksaved', data => {
+    console.log('\nA new book has been saved.', gradient.summer(data.message))
+    io.emit('booksaved', data)
+  })
+  
+  // disconnect is fired when a client leaves the server
+  socket.on('disconnect', () => {
+    console.log(gradient.atlas('\nClient disconnected'))
+  })
 })

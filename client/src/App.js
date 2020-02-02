@@ -4,10 +4,17 @@ import Search from './pages/search'
 import Saved from './pages/save'
 import NoMatch from './pages/nomatch'
 import Navbar from './components/Navbar'
+import Alert from './components/Alert'
+import openSocket from 'socket.io-client'
+const socket = openSocket('http://localhost:3001')
 
 function App() {
+  let bookSaved = false
+  socket.on('bookSaved', (data) => {
+    console.log('A book has been saved', data)
+  })
   return (
-    <div className="mx-auto">
+    <div className='mx-auto'>
       <Router>
         <Navbar />
         <Switch>
@@ -15,6 +22,7 @@ function App() {
           <Route exact path='/saved' component={Saved} />
           <Route exact path='*' component={NoMatch} />
         </Switch>
+        {/* <Alert alertMessage='book saved'/> */}
       </Router>
     </div>
   )

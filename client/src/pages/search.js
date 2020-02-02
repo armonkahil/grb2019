@@ -16,7 +16,7 @@ function Search() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
-
+  
   useEffect(() => {
     // if search field is empty, stop.
     if (!search) {
@@ -35,7 +35,6 @@ function Search() {
         // set response data to books
         setBooks(res.data.items)
         setLoading(false)
-        console.log(res.data.items)
       })
       .catch(err => console.log(err))
     // [Search] =  run every time search is updated
@@ -44,7 +43,7 @@ function Search() {
   // handle input field changes
   const handleInputChange = event => {
     const newInput = event.target.value.trim().replace(/\s/g, '+')
-    console.log('newInput:', newInput)
+    console.log(newInput)
     setInput(newInput)
   }
   // handle search Button event
