@@ -56,9 +56,9 @@ io.on('connection', socket => {
   console.log(gradient.vice('\nNew client connected'))
 
   
-  socket.on('booksaved', data => {
+  socket.on('bookSaved', data => {
     console.log('\nA new book has been saved.', gradient.summer(data.message))
-    io.emit('booksaved', data)
+    io.emit('bookSaved', data)
   })
   
   // disconnect is fired when a client leaves the server

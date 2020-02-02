@@ -7,6 +7,8 @@ import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
+import openSocket from 'socket.io-client'
+const socket = openSocket('http://localhost:3001/')
 
 // Search Page
 function Search() {
@@ -60,6 +62,9 @@ function Search() {
         console.log(res)
         // update books
         updateBooks(bookSaved)
+        socket.emit('bookSaved', {
+          message: 'A book has been saved'
+        })
       })
       .catch(err => {
         setError(err)

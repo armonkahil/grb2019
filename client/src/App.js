@@ -9,9 +9,9 @@ import openSocket from 'socket.io-client'
 const socket = openSocket('http://localhost:3001')
 
 function App() {
-  let bookSaved = false
-  socket.on('bookSaved', (data) => {
+  socket.on('bookSaved', data => {
     console.log('A book has been saved', data)
+    alert(data.message)
   })
   return (
     <div className='mx-auto'>
@@ -22,7 +22,7 @@ function App() {
           <Route exact path='/saved' component={Saved} />
           <Route exact path='*' component={NoMatch} />
         </Switch>
-        {/* <Alert alertMessage='book saved'/> */}
+        {/* <Alert alertMessage='book saved' bookSavedAlert={bookSavedAlert}/> */}
       </Router>
     </div>
   )
