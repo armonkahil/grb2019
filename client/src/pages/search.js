@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Jumbotron from '../components/Jumbotron'
 import Row from '../components/Row'
 import SearchThis from '../components/SearchContainer'
-import Column from '../components/Column'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
 import openSocket from 'socket.io-client'
-const socket = openSocket('http://localhost:3001/')
+const socket = openSocket('https://googlereactbooks1.herokuapp.com/')
 
 // Search Page
 function Search() {
@@ -90,12 +89,12 @@ function Search() {
       {/* Title Banner */}
       <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
       <Row spacing={'justify-content-center mx-auto my-3'} />
-      <Column />
+      
       {/* Search Container */}
       <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       {/* Results Container */}
       <Row spacing={'justify-content-center mx-auto my-3'} />
-      <Column />
+    
       {/* if books contains data */}
       {books.length ? (
         <List>

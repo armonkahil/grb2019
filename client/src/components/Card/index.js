@@ -2,7 +2,7 @@ import React from 'react'
 
 function Card(props) {
   return (
-    <div className='card container col bg-gradient-light m-5 p-3 animated fadeInUpBig'>
+    <div className='card container bg-gradient-light my-5 animated fadeInUpBig'>
       {props.children}
     </div>
   )
