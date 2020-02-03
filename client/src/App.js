@@ -15,6 +15,7 @@ function App() {
   return (
     <div className='col-md-8 container mx-auto'>
       <Router>
+
         <Navbar />
         <Switch>
           <Route exact path='/' component={Search} />

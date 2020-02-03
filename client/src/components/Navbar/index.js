@@ -13,15 +13,15 @@ function Navbar() {
     ? 'collapse navbar-collapse'
     : 'collapse navbar-collapse show animated fadeIn'
   const classTwo = collapsed
-    ? 'navbar-toggler navbar-toggler-right collapsed'
-    : 'navbar-toggler navbar-toggler-right'
+    ? 'navbar-toggler text-light navbar-toggler-right collapsed'
+    : 'navbar-toggler text-light navbar-toggler-right'
 
   return (
     <div>
-      <nav className='navbar navbar-expand-lg text-dark m-0'>
+      <nav className='navbar navbar-expand-lg navbar-dark bg-dark transparent-nav my-3'>
         <button
           onClick={toggleNavbar}
-          className={`${classTwo} bg-light`}
+          className={`${classTwo}`}
           type='button'
           data-toggle='collapse'
           data-target='#navbarResponsive'
@@ -29,9 +29,9 @@ function Navbar() {
           aria-expanded='false'
           aria-label='Toggle navigation'
         >
-          <span className='navbar-toggler-icon' />
+          <span className='navbar-toggler-icon bg-inverse' />
         </button>
-        <div className={`${classOne} pl-2 `} id='navbarResponsive'>
+        <div className={`${classOne} pl-2 text-light `} id='navbarResponsive'>
           <h1 className='banner'>(React) Google Books</h1>
           <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
             <li className='nav-item active'>
