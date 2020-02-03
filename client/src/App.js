@@ -4,10 +4,9 @@ import Search from './pages/search'
 import Saved from './pages/save'
 import NoMatch from './pages/nomatch'
 import Navbar from './components/Navbar'
-import Alert from './components/Alert'
+// import Alert from './components/Alert'
 import openSocket from 'socket.io-client'
-const socket = openSocket('http://localhost:3001')
-
+const socket = openSocket('https://googlereactbooks1.herokuapp.com/')
 function App() {
   socket.on('bookSaved', data => {
     console.log('A book has been saved', data)

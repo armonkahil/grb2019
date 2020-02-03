@@ -53,11 +53,11 @@ const io = require('socket.io')(server)
 
 // This is what the socket.io syntax is like, we will work this later
 io.on('connection', socket => {
-  console.log(gradient.vice('\nNew client connected'))
-
+  console.log(gradient.vice(`New client connected to server ${socket.id}`))
+  
   
   socket.on('bookSaved', data => {
-    console.log('\nA new book has been saved.', gradient.summer(data.message))
+    console.log(gradient.summer(data.message))
     io.emit('bookSaved', data)
   })
   

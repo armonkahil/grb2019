@@ -23,7 +23,6 @@ class Saved extends Component {
       .then(res => {
         this.setState({ savedBooks: res, loading: false })
       })
-      .then(() => console.log(this.state.savedBooks))
       .catch(err => console.log(err))
   }
 
