@@ -1,16 +1,16 @@
 
 # Google React Books
-### A Mern React App
+### A Full Stack Mern App
 ![Landing](client/public/books.gif)
 
 
 ### Deployed to [Heroku](https://googlereactbooks1.herokuapp.com/)
 
-This is a Full-Stack MERN Book searching app that sources the Google Books API. The user can then save a book from the search results to a list thats stored in MongoDB.
+This is a full-stack MERN app that sources Google Books API. The user can search for anything in the google books store. Those results are then rendered to the page where the user can then save favorites to MongoDB. By using Socket.io, every time a book is saved, all open browsers using the app are alerted.
 
 #Technology Used
-- Mern
 - React
+- MongoDB
 - Node
 - Express
 - if-Env
@@ -23,7 +23,6 @@ This is a Full-Stack MERN Book searching app that sources the Google Books API. 
 - Create-react-app
 - Heroku
 - Mlab
-- React Hooks
 - Socket.io
   
   
