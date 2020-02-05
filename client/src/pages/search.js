@@ -17,7 +17,7 @@ function Search() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState({})
-  
+
   useEffect(() => {
     // if search field is empty, stop.
     if (!search) {
@@ -27,7 +27,9 @@ function Search() {
     // Axios call to source Google Books API
     API.getGoogleSearchBooks(search)
       .then(res => {
-        if (res.data.length === 0) {
+        if (res.data.totalItems === 0) {
+          alert('No results found.')
+          setLoading(false)
           throw new Error('No results found.')
         }
         if (res.data.status === 'error') {
@@ -44,7 +46,6 @@ function Search() {
   // handle input field changes
   const handleInputChange = event => {
     const newInput = event.target.value.trim().replace(/\s/g, '+')
-    console.log(newInput)
     setInput(newInput)
   }
   // handle search Button event
@@ -58,7 +59,6 @@ function Search() {
     // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
       .then(res => {
-        console.log(res)
         // update books
         updateBooks(bookSaved)
         socket.emit('bookSaved', {
@@ -67,19 +67,14 @@ function Search() {
       })
       .catch(err => {
         setError(err)
-        console.log(err.response)
-        err.response.data.code === 11000
-          ? alert('Book already saved')
-          : console.log(error)
+        err.response.data.code === 11000 ? alert('Book already saved') : setError(err)
       })
   }
-  const httpsConverter = (link) => { 
+  const httpsConverter = link => {
     return 'https' + link.substr(4, link.length - 1)
   }
   // update books hook
   const updateBooks = bookSaved => {
-    console.log('bookSaved:', bookSaved)
-
     const newBooks = books.filter(book => bookSaved._id !== book.id)
     setBooks(newBooks)
   }
@@ -89,12 +84,12 @@ function Search() {
       {/* Title Banner */}
       <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
       <Row spacing={'justify-content-center mx-auto my-3'} />
-      
+
       {/* Search Container */}
       <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       {/* Results Container */}
       <Row spacing={'justify-content-center mx-auto my-3'} />
-    
+
       {/* if books contains data */}
       {books.length ? (
         <List>
