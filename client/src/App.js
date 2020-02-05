@@ -4,7 +4,6 @@ import Search from './pages/search'
 import Saved from './pages/save'
 import NoMatch from './pages/nomatch'
 import Navbar from './components/Navbar'
-// import Alert from './components/Alert'
 import openSocket from 'socket.io-client'
 const socket = openSocket('https://googlereactbooks1.herokuapp.com/')
 function App() {
@@ -13,16 +12,15 @@ function App() {
     alert(data.message)
   })
   return (
-    <div className='col-md-8 container mx-auto'>
+    <div className='col-8 container-fluid mx-auto'>
       <Router>
-
         <Navbar />
         <Switch>
           <Route exact path='/' component={Search} />
           <Route exact path='/saved' component={Saved} />
           <Route exact path='*' component={NoMatch} />
         </Switch>
-        {/* <Alert alertMessage='book saved' bookSavedAlert={bookSavedAlert}/> */}
+      
       </Router>
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function Container(props) {
-  return <div className='container-fluid'>{props.children}</div>
+  return <div className='container'>{props.children}</div>
 }
 
 export function Col(props) {
