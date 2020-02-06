@@ -4,7 +4,7 @@ import { SearchBtn } from '../Buttons'
 function SearchThis(props) {
   return (
       <div className='card container card-body text-center'>
-        <h1 className='card-title '>Book Search</h1>
+        <h1 className='card-title text-light'>Book Search</h1>
         <input
           className='form-control'
           type='text'

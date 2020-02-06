@@ -1,5 +1,7 @@
 .jumbotron {
-  background-image: url('./library-university-books-students-12064.jpg');
+  /* background-image: url('./library-university-books-students-12064.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  */
+  background-color: #ec8f00;
 }
