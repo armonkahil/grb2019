@@ -39,10 +39,10 @@ function Book({
                   </>
                 ) : (
                   <>
-                    <Row spacing='container-fluid my-1'>
+                    <Row spacing='container my-1'>
                       <h4 className='card-subtitle'>{subtitle}</h4>
                     </Row>
-                    <Row spacing='container-fluid my-1'>
+                    <Row spacing='container my-1'>
                       <h4 className='card-subtitle'>{authors}</h4>
                     </Row>
                   </>

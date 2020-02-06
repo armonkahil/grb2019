@@ -85,12 +85,13 @@ function Search() {
     <>
       {/* Title Banner */}
       <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
-      <Row spacing={'justify-content-center mx-auto my-3'} />
+      <Row spacing={'justify-content-center mx-auto my-3'}>
 
       {/* Search Container */}
       <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
+      </Row>
       {/* Results Container */}
-      <Row spacing={'justify-content-center mx-auto my-3'}>
+      <Row spacing={'justify-content-center my-3'}>
         {/* if books contains data */}
         {books.length ? (
           <List>

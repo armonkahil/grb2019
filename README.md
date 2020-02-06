@@ -17,7 +17,7 @@ This is a full-stack MERN app that sources Google Books API. The user can search
 - Mongoose
 - dotenv
 - body-parser
-- eslint
+- ESlint
 - nodemon
 - concurrently
 - Create-react-app

@@ -12,7 +12,7 @@ function App() {
     alert(data.message)
   })
   return (
-    <div className='col-8 container-fluid mx-auto'>
+    <div className='col-8 container'>
       <Router>
         <Navbar />
         <Switch>
