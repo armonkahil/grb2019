@@ -7,7 +7,8 @@ import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
 import openSocket from 'socket.io-client'
-const socket = openSocket('https://googlereactbooks1.herokuapp.com/')
+import devSocket from '../utils/setdev'
+const socket = openSocket(devSocket)
 
 // Search Page
 function Search() {
