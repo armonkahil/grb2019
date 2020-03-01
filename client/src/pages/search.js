@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Jumbotron from '../components/Jumbotron'
-import Row from '../components/Row'
+import { Row, Column } from '../components/Grid'
 import SearchThis from '../components/SearchContainer'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
@@ -83,31 +83,32 @@ function Search() {
   }
 
   return (
-    <>
+    <div className="container mx-auto">
       {/* Title Banner */}
       <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
-      <Row spacing={'justify-content-center mx-auto my-3'}>
+      <Row styling={'justify-content-center mx-auto my-3'}>
 
       {/* Search Container */}
       <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       </Row>
       {/* Results Container */}
-      <Row spacing={'justify-content-center my-3'}>
+      <Row styling={'justify-content-center my-3'}>
+        <Column>
         {/* if books contains data */}
         {books.length ? (
           <List>
             {books.map(book => (
               <Book
-                key={book.etag}
-                id={book.id}
-                link={book.volumeInfo.previewLink}
+              key={book.etag}
+              id={book.id}
+              link={book.volumeInfo.previewLink}
                 title={book.volumeInfo.title}
                 subtitle={book.volumeInfo.subtitle}
                 // Convert Authors array to a string
                 authors={
                   book.volumeInfo.authors
-                    ? ` Written by ${book.volumeInfo.authors.join(', ')}`
-                    : 'No authors listed'
+                  ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                  : 'No authors listed'
                 }
                 description={
                   book.volumeInfo.description ? book.volumeInfo.description : 'No Description'
@@ -115,10 +116,10 @@ function Search() {
                 thumbnail={
                   // // if book.volume.imageLinks exist
                   book.volumeInfo.imageLinks
-                    ? book.volumeInfo.imageLinks.thumbNail
-                      ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                  ? book.volumeInfo.imageLinks.thumbNail
+                  ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
                       : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
-                    : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
                 }
                 saved={false}
                 book={book}
@@ -129,28 +130,29 @@ function Search() {
                     etag: book.etag,
                     title: book.volumeInfo.title,
                     authors: book.volumeInfo.authors
-                      ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                    ? ` Written by ${book.volumeInfo.authors.join(', ')}`
                       : 'No authors listed',
-                    description: book.volumeInfo.description
+                      description: book.volumeInfo.description
                       ? book.volumeInfo.description
                       : 'No Description provided',
-                    image: book.volumeInfo.imageLinks
+                      image: book.volumeInfo.imageLinks
                       ? book.volumeInfo.imageLinks.thumbNail
-                        ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
-                        : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
+                      ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                      : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
                       : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
-                    link: book.volumeInfo.infoLink,
-                    saved: true
-                  })
-                }
-              />
+                      link: book.volumeInfo.infoLink,
+                      saved: true
+                    })
+                  }
+                  />
             ))}
           </List>
         ) : (
           <NoResults loading={loading} />
-        )}
+          )}
+          </Column>
       </Row>
-    </>
+    </div>
   )
 }
 

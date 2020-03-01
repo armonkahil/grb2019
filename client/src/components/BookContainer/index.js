@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '../Card'
-import Row from '../Row'
-import Column from '../Column'
+import { Column, Row } from '../Grid'
 import ImageContainer from '../ImageContainer'
 import ButtonContainer from '../ButtonContainer'
 
@@ -21,16 +20,16 @@ function Book({
   return (
     <>
       <Card>
-        <Row spacing='container align-self-center'>
-          <Column>
+        <Row styling='container align-self-center'>
+          <Column styling='justify-content-center text-center'>
             <ImageContainer thumbnail={thumbnail} />
           </Column>
         </Row>
         <Row>
           <div className='card-title'>
             <Column>
-              <Row spacing='container'>
-                <Row spacing='container'>
+              <Row styling='container'>
+                <Row styling='container'>
                   <h3 className='display-6 Card-title'>{title}</h3>
                 </Row>
                 {subtitle === undefined ? (
@@ -39,23 +38,23 @@ function Book({
                   </>
                 ) : (
                   <>
-                    <Row spacing='container my-1'>
+                    <Row styling='container my-1'>
                       <h4 className='card-subtitle'>{subtitle}</h4>
                     </Row>
-                    <Row spacing='container my-1'>
+                    <Row styling='container my-1'>
                       <h4 className='card-subtitle'>{authors}</h4>
                     </Row>
                   </>
                 )}
               </Row>
             </Column>
-            <Row spacing='container'>
+            <Row styling='container'>
               <p className='container text-center '>{description}</p>
             </Row>
           </div>
         </Row>
 
-        <Row spacing='container justify-content-end pl-4'>
+        <Row styling='container justify-content-end pl-4'>
           <ButtonContainer
             link={link}
             onClick={onClick}

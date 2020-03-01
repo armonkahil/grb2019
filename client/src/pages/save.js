@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Jumbotron from '../components/Jumbotron'
-import Row from '../components/Row'
-import Column from '../components/Column'
+import { Column, Row } from '../components/Grid'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'

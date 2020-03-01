@@ -6,7 +6,7 @@ function ImageContainer(props) {
 
       <img
         src={props.thumbnail}
-        className='img-responsive align-self-center my-3'
+        className='img-responsive align-self-center mx-auto my-3'
         alt='thumbnail'
         />
         

@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ https://github.com/armonkahil/GoogleReactBooks.git"
+    "url": "git+ https://github.com/armonkahil/grb2019.git"
   },
   "author": "Armon Roberts",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/armonkahil/GoogleReactBooks/issues"
+    "url": "https://github.com/armonkahil/grb2019/issues"
   },
-  "homepage": "https://github.com/armonkahil/GoogleReactBooks#readme",
+  "homepage": "https://github.com/armonkahil/grb2019#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.16.0",
     "@typescript-eslint/parser": "^2.16.0",

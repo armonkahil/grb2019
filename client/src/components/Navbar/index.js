@@ -19,6 +19,7 @@ function Navbar() {
   return (
     <div>
       <nav className='container rounded-lg navbar navbar-expand-lg navbar-dark bg-dark transparent-nav my-3'>
+        <h4 className='mx-2 d-block d-md-none text-light'>(React) Google Books</h4>
         <button
           onClick={toggleNavbar}
           className={`${classTwo}`}
