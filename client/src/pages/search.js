@@ -83,16 +83,16 @@ function Search() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="justify-content-center mx-auto">
       {/* Title Banner */}
+      <Row styling={'container justify-content-center mx-auto my-3'}>
       <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
-      <Row styling={'justify-content-center mx-auto my-3'}>
 
       {/* Search Container */}
       <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       </Row>
       {/* Results Container */}
-      <Row styling={'justify-content-center my-3'}>
+      <Row styling='justify-content-center my-3'>
         <Column>
         {/* if books contains data */}
         {books.length ? (

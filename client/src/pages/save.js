@@ -41,7 +41,7 @@ class Saved extends Component {
 
   render() {
     return (
-      <>
+      <div className='container'>
         <Row />
         <Jumbotron title='(React) Google Books Search' lead='Saved Books of Interest' />
         <Row />
@@ -69,7 +69,7 @@ class Saved extends Component {
         ) : (
           <NoResults loading={this.state.loading} />
         )}
-      </>
+      </div>
     )
   }
 }

@@ -3,8 +3,9 @@ import { SearchBtn } from '../Buttons'
 
 function SearchThis(props) {
   return (
-      <div className='card container card-body text-center'>
-        <h1 className='card-title text-light'>Book Search</h1>
+    <div className='card card-body text-center'>
+      <h1 className='card-title'>Book Search</h1>
+      <form onSubmit={props.handleSubmit}>
         <input
           className='form-control'
           type='text'
@@ -12,9 +13,10 @@ function SearchThis(props) {
           name='search'
           value={props.search}
           onChange={props.handleInputChange}
-        ></input>
+        />
         <SearchBtn handleSubmit={props.handleSubmit} />
-      </div>
+      </form>
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function SearchBtn(props) {
+export const SearchBtn = (props) => {
   return (
     <>
         <div className='d-flex justify-content-end'>
@@ -12,7 +12,7 @@ export function SearchBtn(props) {
   )
 }
 
-export function SaveBtn(props) {
+export const SaveBtn = (props) => {
   return (
     <>
       <button type='button' className={`btn btn-primary mx-2 ${props['data-value']}`} {...props}>
@@ -22,7 +22,7 @@ export function SaveBtn(props) {
   )
 }
 
-export function ViewBtn(props) {
+export const ViewBtn = (props) => {
   return (
     <>
       <a
@@ -30,6 +30,7 @@ export function ViewBtn(props) {
         href={props.link}
         target={'_blank'}
         onClick={props.onClick}
+        style={{ backgroundColor: '#92cd28' }}
         {...props}
       >
         View
@@ -38,13 +39,14 @@ export function ViewBtn(props) {
   )
 }
 
-export function DeleteBtn(props) {
+export const DeleteBtn = (props) => {
   return (
     <span
       className='btn btn-info mx-2 delete-btn float-right'
       {...props}
       role='button'
       tabIndex='0'
+      style={{ backgroundColor: '#F78914' }}
     >
       ✗
     </span>

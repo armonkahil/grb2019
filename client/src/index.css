@@ -2,20 +2,15 @@
   display: none;
 }
 
-html {
-  background: #420b0a; 
-  background-size: cover;
-  /* background-repeat: no  -repeat; */
-
-}
  body {
-  margin: 0;
-  padding: 0;
   font-family: 'Times New Roman', Times, serif;
   font-size: large;
-  background: transparent;
+  /* background: transparent; */
+  background-image: url('418629.jpg');
+   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .card {
-background-color: #ec8f00;
+background-color:  #FFA44E;
 }

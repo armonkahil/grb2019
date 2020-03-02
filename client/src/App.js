@@ -15,8 +15,8 @@ function App() {
     alert(data.message)
   })
   return (
-    <Row className='justify-content-center' styling='mx-0'>
-      <Column size='8' styling='container-fluid align-self-center justify-content-center'>
+    <Row styling='justify-content-center align-self-center mx-0'>
+      <Column size='xl-8 lg-8 xs-12 sm-10'  styling='container align-self-center justify-content-center'>
         <Router>
           <Navbar />
           <Switch>
