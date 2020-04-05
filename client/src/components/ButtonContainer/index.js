@@ -1,19 +1,18 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react'
-import { SaveBtn, ViewBtn, DeleteBtn } from '../Buttons'
+import UnSavedButtons from '../UnSavedButtons'
+import SavedButtons from '../SavedButtons'
 
 const ButtonContainer = props => {
   return (
     <div className='btn btn-sm-group'>
       {!props.saved ? (
         <>
-          <SaveBtn key={props.id} onClick={props.handleSave} />
-          <ViewBtn link={props.link} onClick={props.onClick} />
+          <UnSavedButtons { ...props} />
         </>
       ) : (
-        <>
-          <ViewBtn link={props.link} onClick={props.onClick} />
-          <DeleteBtn id={props.id} onClick={props.delete} />
+          <>
+            <SavedButtons { ...props} />
         </>
       )}
     </div>
