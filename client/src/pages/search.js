@@ -27,7 +27,7 @@ function Search() {
     setLoading(true)
     // Axios call to source Google Books API
     API.getGoogleSearchBooks(search)
-      .then(res => {
+      .then((res) => {
         if (res.data.totalItems === 0) {
           alert('No results found.')
           setLoading(false)
@@ -40,117 +40,120 @@ function Search() {
         setBooks(res.data.items)
         setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
     // [Search] =  run every time search is updated
   }, [search])
 
   // handle input field changes
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const newInput = event.target.value.trim().replace(/\s/g, '+')
     setInput(newInput)
   }
   // handle search Button event
-  const handleSetSubmit = event => {
+  const handleSetSubmit = (event) => {
     event.preventDefault()
     setBooks([])
     setSearch(input)
   }
   // handle save book button event
-  const handleSave = bookSaved => {
+  const handleSave = (bookSaved) => {
     // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
-      .then(res => {
+      .then((res) => {
         // update books
         updateBooks(bookSaved)
         socket.emit('bookSaved', {
-          message: 'A book has been saved'
+          message: 'A book has been saved',
         })
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err)
         error.response.data.code === 11000
           ? alert('Book already saved')
           : alert(error.response.data)
       })
   }
-  const httpsConverter = link => {
+  const httpsConverter = (link) => {
     return 'https' + link.substr(4, link.length - 1)
   }
   // update books hook
-  const updateBooks = bookSaved => {
-    const newBooks = books.filter(book => bookSaved._id !== book.id)
+  const updateBooks = (bookSaved) => {
+    const newBooks = books.filter((book) => bookSaved._id !== book.id)
     setBooks(newBooks)
   }
 
   return (
-    <div className="justify-content-center mx-auto">
+    <div className='justify-content-center mx-auto'>
       {/* Title Banner */}
       <Row styling={'container justify-content-center mx-auto my-3'}>
-      <Jumbotron title='(React) Google Books Search' lead='Search for and Save Books of Interest' />
+        <Jumbotron
+          title='(React) Google Books Search'
+          lead='Search for and Save Books of Interest'
+        />
 
-      {/* Search Container */}
-      <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
+        {/* Search Container */}
+        <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
       </Row>
       {/* Results Container */}
       <Row styling='justify-content-center my-3'>
         <Column>
-        {/* if books contains data */}
-        {books.length ? (
-          <List>
-            {books.map(book => (
-              <Book
-              key={book.etag}
-              id={book.id}
-              link={book.volumeInfo.previewLink}
-                title={book.volumeInfo.title}
-                subtitle={book.volumeInfo.subtitle}
-                // Convert Authors array to a string
-                authors={
-                  book.volumeInfo.authors
-                  ? ` Written by ${book.volumeInfo.authors.join(', ')}`
-                  : 'No authors listed'
-                }
-                description={
-                  book.volumeInfo.description ? book.volumeInfo.description : 'No Description'
-                }
-                thumbnail={
-                  // // if book.volume.imageLinks exist
-                  book.volumeInfo.imageLinks
-                  ? book.volumeInfo.imageLinks.thumbNail
-                  ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
-                      : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
-                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
-                }
-                saved={false}
-                book={book}
-                value={book}
-                handleSave={() =>
-                  handleSave({
-                    _id: book.id,
-                    etag: book.etag,
-                    title: book.volumeInfo.title,
-                    authors: book.volumeInfo.authors
-                    ? ` Written by ${book.volumeInfo.authors.join(', ')}`
-                      : 'No authors listed',
-                      description: book.volumeInfo.description
-                      ? book.volumeInfo.description
-                      : 'No Description provided',
-                      image: book.volumeInfo.imageLinks
+          {/* if books contains data */}
+          {books.length ? (
+            <List>
+              {books.map((book) => (
+                <Book
+                  key={book.etag}
+                  id={book.id}
+                  link={book.volumeInfo.previewLink}
+                  title={book.volumeInfo.title}
+                  subtitle={book.volumeInfo.subtitle}
+                  // Convert Authors array to a string
+                  authors={
+                    book.volumeInfo.authors
+                      ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                      : 'No authors listed'
+                  }
+                  description={
+                    book.volumeInfo.description ? book.volumeInfo.description : 'No Description'
+                  }
+                  thumbnail={
+                    // // if book.volume.imageLinks exist
+                    book.volumeInfo.imageLinks
                       ? book.volumeInfo.imageLinks.thumbNail
-                      ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
-                      : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
-                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
+                        ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                        : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
+                      : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
+                  }
+                  saved={false}
+                  book={book}
+                  value={book}
+                  handleSave={() =>
+                    handleSave({
+                      _id: book.id,
+                      etag: book.etag,
+                      title: book.volumeInfo.title,
+                      authors: book.volumeInfo.authors
+                        ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                        : 'No authors listed',
+                      description: book.volumeInfo.description
+                        ? book.volumeInfo.description
+                        : 'No Description provided',
+                      image: book.volumeInfo.imageLinks
+                        ? book.volumeInfo.imageLinks.thumbNail
+                          ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
+                          : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
+                        : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
                       link: book.volumeInfo.infoLink,
-                      saved: true
+                      saved: true,
                     })
                   }
-                  />
-            ))}
-          </List>
-        ) : (
-          <NoResults loading={loading} />
+                />
+              ))}
+            </List>
+          ) : (
+            <NoResults loading={loading} />
           )}
-          </Column>
+        </Column>
       </Row>
     </div>
   )
