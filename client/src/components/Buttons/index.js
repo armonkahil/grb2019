@@ -1,28 +1,36 @@
 import React from 'react'
 
-export const SearchBtn = (props) => {
+export const SearchBtn = ({ handleSubmit }) => {
   return (
     <>
-        <div className='d-flex justify-content-end'>
-          <button type='button' className='btn btn-success my-2' onClick={props.handleSubmit}>
-            Submit
-          </button>
-        </div>
+      <div className='d-flex justify-content-end'>
+        <button
+          type='button'
+          className='btn btn-success my-2'
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
+      </div>
     </>
   )
 }
 
-export const SaveBtn = (props) => {
+export const SaveBtn = props => {
   return (
     <>
-      <button type='button' className={`btn btn-primary mx-2 ${props['data-value']}`} {...props}>
+      <button
+        type='button'
+        className={`btn btn-primary mx-2 ${props['data-value']}`}
+        {...props}
+      >
         Save
       </button>
     </>
   )
 }
 
-export const ViewBtn = (props) => {
+export const ViewBtn = props => {
   return (
     <>
       <a
@@ -40,7 +48,7 @@ export const ViewBtn = (props) => {
   )
 }
 
-export const DeleteBtn = (props) => {
+export const DeleteBtn = props => {
   return (
     <span
       className='btn btn-info mx-2 delete-btn float-right'
