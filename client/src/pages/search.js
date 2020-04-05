@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react'
+import openSocket from 'socket.io-client'
 import Jumbotron from '../components/Jumbotron'
 import { Row, Column } from '../components/Grid'
 import SearchThis from '../components/SearchContainer'
@@ -6,8 +11,8 @@ import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
-import openSocket from 'socket.io-client'
 import devSocket from '../utils/setdev'
+
 const socket = openSocket(devSocket)
 
 // Search Page
@@ -27,7 +32,7 @@ function Search() {
     setLoading(true)
     // Axios call to source Google Books API
     API.getGoogleSearchBooks(search)
-      .then((res) => {
+      .then(res => {
         if (res.data.totalItems === 0) {
           alert('No results found.')
           setLoading(false)
@@ -40,59 +45,63 @@ function Search() {
         setBooks(res.data.items)
         setLoading(false)
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
     // [Search] =  run every time search is updated
   }, [search])
 
+  // update books hook
+  const updateBooks = bookSaved => {
+    const newBooks = books.filter(book => bookSaved._id !== book.id)
+    setBooks(newBooks)
+  }
   // handle input field changes
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const newInput = event.target.value.trim().replace(/\s/g, '+')
     setInput(newInput)
   }
   // handle search Button event
-  const handleSetSubmit = (event) => {
+  const handleSetSubmit = event => {
     event.preventDefault()
     setBooks([])
     setSearch(input)
   }
   // handle save book button event
-  const handleSave = (bookSaved) => {
+  const handleSave = bookSaved => {
     // Source Axios to send data to MongoDB
     API.saveBook(bookSaved)
-      .then((res) => {
+      // eslint-disable-next-line no-unused-vars
+      .then(res => {
         // update books
         updateBooks(bookSaved)
         socket.emit('bookSaved', {
-          message: 'A book has been saved',
+          message: 'A book has been saved'
         })
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err)
         error.response.data.code === 11000
           ? alert('Book already saved')
           : alert(error.response.data)
       })
   }
-  const httpsConverter = (link) => {
-    return 'https' + link.substr(4, link.length - 1)
-  }
-  // update books hook
-  const updateBooks = (bookSaved) => {
-    const newBooks = books.filter((book) => bookSaved._id !== book.id)
-    setBooks(newBooks)
+  const httpsConverter = link => {
+    return `https${link.substr(4, link.length - 1)}`
   }
 
   return (
     <div className='justify-content-center mx-auto'>
       {/* Title Banner */}
-      <Row styling={'container justify-content-center mx-auto my-3'}>
+      <Row styling='container justify-content-center mx-auto my-3'>
         <Jumbotron
           title='(React) Google Books Search'
           lead='Search for and Save Books of Interest'
         />
 
         {/* Search Container */}
-        <SearchThis handleInputChange={handleInputChange} handleSubmit={handleSetSubmit} />
+        <SearchThis
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSetSubmit}
+        />
       </Row>
       {/* Results Container */}
       <Row styling='justify-content-center my-3'>
@@ -100,7 +109,7 @@ function Search() {
           {/* if books contains data */}
           {books.length ? (
             <List>
-              {books.map((book) => (
+              {books.map(book => (
                 <Book
                   key={book.etag}
                   id={book.id}
@@ -110,18 +119,26 @@ function Search() {
                   // Convert Authors array to a string
                   authors={
                     book.volumeInfo.authors
-                      ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                      ? ` Written by ${book.volumeInfo.authors.join(
+                          ', '
+                        )}`
                       : 'No authors listed'
                   }
                   description={
-                    book.volumeInfo.description ? book.volumeInfo.description : 'No Description'
+                    book.volumeInfo.description
+                      ? book.volumeInfo.description
+                      : 'No Description'
                   }
                   thumbnail={
                     // // if book.volume.imageLinks exist
                     book.volumeInfo.imageLinks
                       ? book.volumeInfo.imageLinks.thumbNail
-                        ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
-                        : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
+                        ? httpsConverter(
+                            book.volumeInfo.imageLinks.thumbNail
+                          )
+                        : httpsConverter(
+                            book.volumeInfo.imageLinks.smallThumbnail
+                          )
                       : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif'
                   }
                   saved={false}
@@ -133,18 +150,25 @@ function Search() {
                       etag: book.etag,
                       title: book.volumeInfo.title,
                       authors: book.volumeInfo.authors
-                        ? ` Written by ${book.volumeInfo.authors.join(', ')}`
+                        ? ` Written by ${book.volumeInfo.authors.join(
+                            ', '
+                          )}`
                         : 'No authors listed',
                       description: book.volumeInfo.description
                         ? book.volumeInfo.description
                         : 'No Description provided',
                       image: book.volumeInfo.imageLinks
                         ? book.volumeInfo.imageLinks.thumbNail
-                          ? httpsConverter(book.volumeInfo.imageLinks.thumbNail)
-                          : httpsConverter(book.volumeInfo.imageLinks.smallThumbnail)
+                          ? httpsConverter(
+                              book.volumeInfo.imageLinks.thumbNail
+                            )
+                          : httpsConverter(
+                              book.volumeInfo.imageLinks
+                                .smallThumbnail
+                            )
                         : 'https://books.google.com/googlebooks/images/no_cover_thumb_with_curl.gif',
                       link: book.volumeInfo.infoLink,
-                      saved: true,
+                      saved: true
                     })
                   }
                 />

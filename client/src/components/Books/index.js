@@ -1,5 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react'
 
-export const bookTitle = ({ bookTitle }) => {
-  return <h3 className='display-6 card-title mx-auto text-center display-block'>{bookTitle}</h3>
+const bookTitle = props => {
+  return (
+    <h3 className='display-6 card-title mx-auto text-center display-block'>
+      {props.bookTitle}
+    </h3>
+  )
 }
+export default bookTitle

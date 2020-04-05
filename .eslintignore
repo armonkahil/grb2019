@@ -1,4 +1,4 @@
 build/
 node_modules/
-src/registerServiceWorker.js
+client/src/registerServiceWorker.js
 sockets.js

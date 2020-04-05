@@ -3,3 +3,4 @@ build/
 node_modules/
 client/node_modules/
 package.json
+client/src/registerServiceWorker.js

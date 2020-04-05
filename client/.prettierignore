@@ -1,6 +1,4 @@
-dist/
 build/
 node_modules/
-scripts/
-package.json
-src/
+src/serviceWorker.js
+src/registerServiceWorker.js

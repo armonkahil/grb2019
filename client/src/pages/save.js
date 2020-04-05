@@ -1,3 +1,6 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react'
 import Jumbotron from '../components/Jumbotron'
 import { Column, Row } from '../components/Grid'
@@ -5,11 +8,17 @@ import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
+
 class Saved extends Component {
-  state = {
-    savedBooks: [],
-    loading: false,
-    error: ''
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      savedBooks: [],
+      loading: false,
+      // eslint-disable-next-line react/no-unused-state
+      error: ''
+    }
   }
 
   componentDidMount() {
@@ -28,6 +37,7 @@ class Saved extends Component {
   handleDelete = event => {
     const bookDeleted = event.target.id
     API.deleteBook(bookDeleted)
+      // eslint-disable-next-line no-unused-vars
       .then(res => {
         this.loadSavedBooks()
       })
@@ -35,7 +45,9 @@ class Saved extends Component {
   }
 
   updateBooks = bookSaved => {
-    const newBooks = this.state.savedBooks.filter(book => bookSaved._id !== book.id)
+    const newBooks = this.state.savedBooks.filter(
+      book => bookSaved._id !== book.id
+    )
     this.setState({ savedBooks: newBooks, loading: false })
   }
 
@@ -43,7 +55,10 @@ class Saved extends Component {
     return (
       <div className='container'>
         <Row />
-        <Jumbotron title='(React) Google Books Search' lead='Saved Books of Interest' />
+        <Jumbotron
+          title='(React) Google Books Search'
+          lead='Saved Books of Interest'
+        />
         <Row />
         <Column />
         {this.state.savedBooks ? (

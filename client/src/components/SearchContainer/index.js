@@ -1,20 +1,20 @@
 import React from 'react'
 import { SearchBtn } from '../Buttons'
 
-function SearchThis(props) {
+const SearchThis = ({ search, handleInputChange, handleSubmit }) => {
   return (
     <div className='card card-body text-center'>
       <h1 className='card-title'>Book Search</h1>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           className='form-control'
           type='text'
           placeholder='Search for a Book...'
           name='search'
-          value={props.search}
-          onChange={props.handleInputChange}
+          value={search}
+          onChange={handleInputChange}
         />
-        <SearchBtn handleSubmit={props.handleSubmit} />
+        <SearchBtn handleSubmit={handleSubmit} />
       </form>
     </div>
   )

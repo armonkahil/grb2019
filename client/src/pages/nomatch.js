@@ -7,7 +7,7 @@ function NoMatch() {
     <Container>
       <Row styling=' row align-self-center'>
         <Column>
-          <Jumbotron title='404 Page Not Found' lead='🙄'></Jumbotron>
+          <Jumbotron title='404 Page Not Found' lead='🙄' />
         </Column>
       </Row>
     </Container>

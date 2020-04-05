@@ -1,5 +1,7 @@
 # Google React Books
+
 [![Build Status](https://travis-ci.com/armonkahil/grb2019.svg?branch=master)](https://travis-ci.com/armonkahil/grb2019) [![Maintainability](https://api.codeclimate.com/v1/badges/ac003e3eded1805d48eb/maintainability)](https://codeclimate.com/github/armonkahil/grb2019/maintainability)
+
 ### A Full Stack Mern App
 
 ![Landing](client/public/search.png)

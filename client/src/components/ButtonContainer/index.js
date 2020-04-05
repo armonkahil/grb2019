@@ -1,9 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react'
 import { SaveBtn, ViewBtn, DeleteBtn } from '../Buttons'
 
-function ButtonContainer(props) {
+const ButtonContainer = props => {
   return (
-    <div className="btn btn-sm-group">
+    <div className='btn btn-sm-group'>
       {!props.saved ? (
         <>
           <SaveBtn key={props.id} onClick={props.handleSave} />

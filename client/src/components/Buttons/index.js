@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 
 export const SearchBtn = ({ handleSubmit }) => {
@@ -30,17 +31,17 @@ export const SaveBtn = props => {
   )
 }
 
-export const ViewBtn = props => {
+export const ViewBtn = ({ link, onClick, ...rest }) => {
   return (
     <>
       <a
         className='btn btn-success active'
-        href={props.link}
+        href={link}
         target='_blank'
         rel='noopener noreferrer'
-        onClick={props.onClick}
+        onClick={onClick}
         style={{ backgroundColor: '#92cd28' }}
-        {...props}
+        {...rest}
       >
         View
       </a>

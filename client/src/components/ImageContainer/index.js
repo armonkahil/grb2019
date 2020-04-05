@@ -1,15 +1,12 @@
 import React from 'react'
 
-function ImageContainer(props) {
+const ImageContainer = ({ thumbnail }) => {
   return (
-    
-
-      <img
-        src={props.thumbnail}
-        className='img-responsive align-self-center mx-auto my-3'
-        alt='thumbnail'
-        />
-        
+    <img
+      src={thumbnail}
+      className='img-responsive align-self-center mx-auto my-3'
+      alt='thumbnail'
+    />
   )
 }
 

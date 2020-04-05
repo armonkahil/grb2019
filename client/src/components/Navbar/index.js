@@ -17,12 +17,14 @@ function Navbar() {
     : 'navbar-toggler rounded-lg text-light navbar-toggler-right'
 
   return (
-    <div className="container">
+    <div className='container'>
       <nav
         className='container rounded-lg navbar navbar-expand-lg navbar-dark my-3'
         style={{ backgroundColor: '#FFA44E' }}
       >
-        <h4 className='mx-2 d-block d-md-none text-light'>(React) Google Books</h4>
+        <h4 className='mx-2 d-block d-md-none text-light'>
+          (React) Google Books
+        </h4>
         <button
           onClick={toggleNavbar}
           className={`${classTwo}`}
@@ -35,8 +37,13 @@ function Navbar() {
         >
           <span className='navbar-toggler-icon bg-inverse' />
         </button>
-        <div className={`${classOne} pl-2 text-light rounded-lg `} id='navbarResponsive'>
-          <h4 className='banner d-none d-md-block'>(React) Google Books</h4>
+        <div
+          className={`${classOne} pl-2 text-light rounded-lg `}
+          id='navbarResponsive'
+        >
+          <h4 className='banner d-none d-md-block'>
+            (React) Google Books
+          </h4>
           <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
             <li className='nav-item active'>
               <Link className='nav-link' to='/'>
@@ -58,7 +65,7 @@ function Navbar() {
                 width='90'
                 height='50'
                 alt='Google Logo'
-              ></img>
+              />
             </a>
           </div>
         </div>
