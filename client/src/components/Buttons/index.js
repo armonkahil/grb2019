@@ -21,7 +21,7 @@ export const SaveBtn = props => {
     <>
       <button
         type='button'
-        className={`btn btn-primary mx-2 ${props['data-value']}`}
+        className='btn btn-primary mx-2'
         {...props}
       >
         Save
@@ -36,7 +36,7 @@ export const ViewBtn = props => {
       <a
         className='btn btn-success active'
         href={props.link}
-        target={'_blank'}
+        target='_blank'
         rel='noopener noreferrer'
         onClick={props.onClick}
         style={{ backgroundColor: '#92cd28' }}
