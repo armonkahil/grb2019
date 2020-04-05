@@ -1,17 +1,8 @@
 import React from 'react'
-import { Column, Row, Container } from '../components/Grid'
-import Jumbotron from '../components/Jumbotron'
+import Header from '../Header'
 
 function NoMatch() {
-  return (
-    <Container>
-      <Row styling=' row align-self-center'>
-        <Column>
-          <Jumbotron title='404 Page Not Found' lead='🙄' />
-        </Column>
-      </Row>
-    </Container>
-  )
+  return <Header title='404 Page Not Found' lead='🙄'/>
 }
 
 export default NoMatch

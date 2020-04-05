@@ -2,12 +2,11 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react'
-import Jumbotron from '../components/Jumbotron'
-import { Column, Row } from '../components/Grid'
 import Book from '../components/BookContainer'
 import { List } from '../components/List'
 import API from '../utils/API'
 import NoResults from '../components/NoResults'
+import Header from '../Header'
 
 class Saved extends Component {
   constructor(props) {
@@ -53,38 +52,36 @@ class Saved extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <Row />
-        <Jumbotron
+      <>
+        <Header
           title='(React) Google Books Search'
           lead='Saved Books of Interest'
-        />
-        <Row />
-        <Column />
-        {this.state.savedBooks ? (
-          <List>
-            {this.state.savedBooks.map(book => (
-              <Book
-                key={book.etag}
-                id={book._id}
-                link={book.link}
-                title={book.title}
-                subtitle={book.subtitle}
-                authors={book.authors}
-                description={book.description}
-                thumbnail={book.image}
-                book={book}
-                value={book}
-                saved={book.saved}
-                handleDelete={this.handleDelete}
-                onClick={() => this.onClick}
-              />
-            ))}
-          </List>
-        ) : (
-          <NoResults loading={this.state.loading} />
-        )}
-      </div>
+        >
+          {this.state.savedBooks ? (
+            <List>
+              {this.state.savedBooks.map(book => (
+                <Book
+                  key={book.etag}
+                  id={book._id}
+                  link={book.link}
+                  title={book.title}
+                  subtitle={book.subtitle}
+                  authors={book.authors}
+                  description={book.description}
+                  thumbnail={book.image}
+                  book={book}
+                  value={book}
+                  saved={book.saved}
+                  handleDelete={this.handleDelete}
+                  onClick={() => this.onClick}
+                />
+              ))}
+            </List>
+          ) : (
+            <NoResults loading={this.state.loading} />
+          )}
+        </Header>
+      </>
     )
   }
 }
