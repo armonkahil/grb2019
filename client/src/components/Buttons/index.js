@@ -29,6 +29,7 @@ export const ViewBtn = (props) => {
         className='btn btn-success active'
         href={props.link}
         target={'_blank'}
+        rel='noopener noreferrer'
         onClick={props.onClick}
         style={{ backgroundColor: '#92cd28' }}
         {...props}
